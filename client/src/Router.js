@@ -1,9 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ProductList from './pages/Product/ProductList';
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <Routes>{/* <Route path="/" element={<Main />} /> */}</Routes>
+      <Routes>
+        <Route path="/" element={<ProductList />} />
+      </Routes>
     </BrowserRouter>
   );
 };
