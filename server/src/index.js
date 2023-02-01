@@ -1,5 +1,9 @@
 const express = require('express');
+const connect = require('./schemas/index');
+
 const app = express();
+
+connect();
 
 app.use('/', (req, res) => {
   res.send('ok');
