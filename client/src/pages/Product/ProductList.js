@@ -28,7 +28,7 @@ const MainNav = styled.div`
   border-bottom: 10px solid rgba(153, 164, 151, 1);
   padding-bottom: 20px;
   font-weight: 600;
-  font-size: 30px; /* font-family: 'IBM Plex Sans KR', sans-serif; */
+  font-size: 30px;
   > span {
     padding: 5px;
   }
