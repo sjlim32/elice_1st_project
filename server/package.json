@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "nodemon node ./src/index.js"
+    "start": "nodemon node ./src/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,7 +17,11 @@
     "prettier": "^2.8.3"
   },
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1"
   }
 }
