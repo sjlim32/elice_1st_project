@@ -21,6 +21,7 @@ const userSchema = new Schema(
     phone: String,
     order: {
       type: [Schema.Types.ObjectId],
+      ref: 'Order',
       default: [],
     },
     account: String,
