@@ -1,11 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ProductList from './pages/Product/ProductList';
-
+import Signup from './pages/Signup/Signup';
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<ProductList />} />
+        <Route path="/" element={<Signup />} />
       </Routes>
     </BrowserRouter>
   );
