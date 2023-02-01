@@ -4,6 +4,8 @@ import jwt from 'jsonwebtoken';
 
 const router = Router();
 
+import User from '../models/user';
+
 // * 회원가입 router
 router.use('/signup', userController.signUp);
 
@@ -11,7 +13,6 @@ router.use('/signup', userController.signUp);
 router.use('/login', userController.logIn);
 
 // * 회원가입 api
-
 router.post('/signup', async (req, res) => {
     const { email, name, password, passwordConfirm} = await req.body;
     let errors = [];
@@ -24,6 +25,41 @@ router.post('/signup', async (req, res) => {
         errors.push({ message : '비밀번호가 일치하지 않습니다.'})
     }
 
+    if (password.length < 6 ) {
+        errors.push({ message : '비밀번호는 최소 7자리 이상 입력해주세요.'})
+    }
+
+    if (errors.length > 0 ) {
+        res.render('signup', {
+            errors,
+            email,
+            name,
+            password,
+            passwordConfirm
+        });
+    } else {
+        const user = await User.findOne({ email : email })
+        if (user) {
+            errors.push({ message : "이미 존재하는 사용자입니다." });
+            res.render('signup', {
+                errors,
+                email,
+                name,
+                password,
+                passwordConfirm
+            });
+        } else {
+            const newUser = new user({
+                email,
+                name,
+                password
+            })
+
+            // ! 비밀번호 해싱 필요
+            // bcrypt.
+            
+        }
+    }
 })
 
 // * 로그인 api
