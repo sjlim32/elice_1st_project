@@ -36,7 +36,8 @@ router.post('/signup', async (req, res) => {
       await User.create(newUser);
       res.json({ message: '사용자가 정상적으로 등록되었습니다.' });
     } catch (error) {
-      res.json({ error });
+      console.log(error)
+      res.status(500).json({ message: '회원가입에 실패했습니다.' });
     }
   }
 });
@@ -59,8 +60,70 @@ router.post('/login', async (req, res) => {
     });
     res.status(200).json({ token });
   } catch (error) {
-    res.status(500).json({ error });
+    console.log(error)
+    res.status(500).json({ message: '로그인에 실패했습니다.' });
   }
 });
+
+// * 회원 정보 조회
+router.get('/:user_id', async (req, res) => {
+  const userId = req.params.user_id;
+  try {
+    const user = await User.findOne({ _id:userId });
+    const userInfo = { 
+      id : user._id,
+      email: user.email,
+      name: user.name,
+      password: user.password,
+      address: user.address,
+      phone: user.phone,
+      account: user.account
+    }
+    res.status(200).json(userInfo)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: '유저가 존재하지 않습니다.' });
+  };
+});
+
+// * 회원 정보 수정
+router.patch('/:user_id', async (req, res) => {
+  const userId = req.params.user_id;
+  const { email, name, password, address, phone, account } = req.body
+
+  const hashedPassword = await bcrypt.hash(password, 12)
+
+  try {
+    const user = await User.findByIdAndUpdate( userId, {
+      email,
+      name,
+      password: hashedPassword,
+      address,
+      phone,
+      account
+    }, {
+      new: true
+    }
+    )
+    
+    res.status(200).json(user)
+  } catch (error) {
+    res.status(500).json({ error })
+  }
+
+})
+
+// * 회원 정보 삭제
+router.delete('/:user_id', async (req, res) => {
+  const userId = req.params.user_id;
+
+  try {
+    await User.deleteOne({ _id: userId })
+    res.status(200).json({ message: '삭제가 완료되었습니다.'})
+  } catch (error) {
+    console.log(error)
+    res.status(200).json({ message: '삭제에 실패했습니다.' })
+  }
+})
 
 export default router;
