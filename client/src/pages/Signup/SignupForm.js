@@ -72,10 +72,10 @@ export default function SignupForm() {
     console.log(confirmPassword);
   };
 
-  // const handleSignup = async e => {
+  // const handleSignup =  e => {
   //   e.preventDefault();
-  //   await axios
-  //     .post('kdt-ai6-team01.elicecoding.com/user/signup', {
+  //    axios
+  //     .post('http://localhost:3000/user/signup', {
   //       email: email,
   //       name: name,
   //       password: password,
@@ -189,7 +189,7 @@ export default function SignupForm() {
       <button
         className="sign-up-btn "
         disabled={!activateButton}
-        onClick={handleSignup}
+        onSubmit={handleSignup}
       >
         이메일로 회원가입
       </button>

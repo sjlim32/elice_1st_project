@@ -12,8 +12,8 @@ export default function Signup() {
       <MainTitle>
         <span>회원가입</span>
       </MainTitle>
-      {/* <MainThemeLine widthLength="35%" /> */}
-      <Line />
+      <MainThemeLine widthLength="35%" />
+      {/* <Line /> */}
       <UserInputContainer>
         <SignupForm />
         <button
