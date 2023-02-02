@@ -36,7 +36,8 @@ router.post('/signup', async (req, res) => {
       await User.create(newUser);
       res.json({ message: '사용자가 정상적으로 등록되었습니다.' });
     } catch (error) {
-      res.status(500).json({ error });
+      console.log(error)
+      res.status(500).json({ message: '회원가입에 실패했습니다.' });
     }
   }
 });
@@ -59,7 +60,8 @@ router.post('/login', async (req, res) => {
     });
     res.status(200).json({ token });
   } catch (error) {
-    res.status(500).json({ error });
+    console.log(error)
+    res.status(500).json({ message: '로그인에 실패했습니다.' });
   }
 });
 
@@ -79,11 +81,12 @@ router.get('/:user_id', async (req, res) => {
     }
     res.status(200).json(userInfo)
   } catch (error) {
-    res.status(500).json({ error });
+    console.log(error)
+    res.status(500).json({ message: '유저가 존재하지 않습니다.' });
   };
 });
 
-// * TODO 회원 정보 수정
+// * 회원 정보 수정
 router.patch('/:user_id', async (req, res) => {
   const userId = req.params.user_id;
   const { email, name, password, address, phone, account } = req.body
@@ -91,14 +94,17 @@ router.patch('/:user_id', async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, 12)
 
   try {
-    const user = await User.findByIdAndUpdate(userId, {
+    const user = await User.findByIdAndUpdate( userId, {
       email,
       name,
       password: hashedPassword,
       address,
       phone,
       account
-    })
+    }, {
+      new: true
+    }
+    )
     
     res.status(200).json(user)
   } catch (error) {
@@ -107,10 +113,17 @@ router.patch('/:user_id', async (req, res) => {
 
 })
 
-// TODO 회원 정보 삭제
-// 사용자는 개인 페이지에서 자신의 회원정보를 삭제(탈퇴)할 수 있다.
+// * 회원 정보 삭제
 router.delete('/:user_id', async (req, res) => {
-  
+  const userId = req.params.user_id;
+
+  try {
+    await User.deleteOne({ _id: userId })
+    res.status(200).json({ message: '삭제가 완료되었습니다.'})
+  } catch (error) {
+    console.log(error)
+    res.status(200).json({ message: '삭제에 실패했습니다.' })
+  }
 })
 
 export default router;
