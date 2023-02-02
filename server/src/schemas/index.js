@@ -1,5 +1,7 @@
-require('dotenv').config();
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const connect = () => {
   mongoose.set('strictQuery', true);
@@ -8,4 +10,4 @@ const connect = () => {
     .then(() => console.log('MongoDB Connected'))
     .catch((error) => console.error(error));
 };
-module.exports = connect;
+export default connect;
