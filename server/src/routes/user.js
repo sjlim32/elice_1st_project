@@ -36,7 +36,7 @@ router.post('/signup', async (req, res) => {
       await User.create(newUser);
       res.json({ message: '사용자가 정상적으로 등록되었습니다.' });
     } catch (error) {
-      res.json({ error });
+      res.status(500).json({ error });
     }
   }
 });
@@ -62,5 +62,31 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ error });
   }
 });
+
+// TODO 회원 정보 조회
+// * 사용자는 개인 페이지에서 자신의 회원정보를 조회할 수 있다.
+// /:user_id 로 유저 id 값을 받아온다.
+// id 값으로 db에서 데이터를 조회한다.
+// 조회한 데이터에서 { id email name password address phone bank_account } 값을 'user'로 전달한다.
+router.get('/user/:user_id', async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const user = await User.findOne({ userId });
+  } catch (error) {
+    res.status(500).json({ error });
+  };
+});
+
+// TODO 회원 정보 수정
+// 사용자는 개인 페이지에서 자신의 회원정보를 수정할 수 있다.
+router.patch('/user/:user_id', async (req, res) => {
+  
+})
+
+// TODO 회원 정보 삭제
+// 사용자는 개인 페이지에서 자신의 회원정보를 삭제(탈퇴)할 수 있다.
+router.delete('/user/:user_id', async (req, res) => {
+  
+})
 
 export default router;
