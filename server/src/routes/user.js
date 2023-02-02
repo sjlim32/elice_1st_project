@@ -63,29 +63,53 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// TODO 회원 정보 조회
-// * 사용자는 개인 페이지에서 자신의 회원정보를 조회할 수 있다.
-// /:user_id 로 유저 id 값을 받아온다.
-// id 값으로 db에서 데이터를 조회한다.
-// 조회한 데이터에서 { id email name password address phone bank_account } 값을 'user'로 전달한다.
-router.get('/user/:user_id', async (req, res) => {
-  const userId = req.params.id;
+// * 회원 정보 조회
+router.get('/:user_id', async (req, res) => {
+  const userId = req.params.user_id;
   try {
-    const user = await User.findOne({ userId });
+    const user = await User.findOne({ _id:userId });
+    const userInfo = { 
+      id : user._id,
+      email: user.email,
+      name: user.name,
+      password: user.password,
+      address: user.address,
+      phone: user.phone,
+      account: user.account
+    }
+    res.status(200).json(userInfo)
   } catch (error) {
     res.status(500).json({ error });
   };
 });
 
-// TODO 회원 정보 수정
-// 사용자는 개인 페이지에서 자신의 회원정보를 수정할 수 있다.
-router.patch('/user/:user_id', async (req, res) => {
-  
+// * TODO 회원 정보 수정
+router.patch('/:user_id', async (req, res) => {
+  const userId = req.params.user_id;
+  const { email, name, password, address, phone, account } = req.body
+
+  const hashedPassword = await bcrypt.hash(password, 12)
+
+  try {
+    const user = await User.findByIdAndUpdate(userId, {
+      email,
+      name,
+      password: hashedPassword,
+      address,
+      phone,
+      account
+    })
+    
+    res.status(200).json(user)
+  } catch (error) {
+    res.status(500).json({ error })
+  }
+
 })
 
 // TODO 회원 정보 삭제
 // 사용자는 개인 페이지에서 자신의 회원정보를 삭제(탈퇴)할 수 있다.
-router.delete('/user/:user_id', async (req, res) => {
+router.delete('/:user_id', async (req, res) => {
   
 })
 
