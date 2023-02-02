@@ -2,54 +2,41 @@ import { Router } from 'express';
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import User from '../schemas/user.js';
+import bcrypt from 'bcryptjs';
 
 const router = Router();
 
 // * 회원가입 api
 router.post('/signup', async (req, res) => {
-  const { email, name, password, passwordConfirm } = await req.body;
-  let errors = [];
+  const { email, name, password, passwordConfirm } = req.body;
 
-  if (!email || !name || !password || passwordConfirm) {
-    errors.push({ message: '모든 값을 입력해주세요.' });
+  if (!email || !name || !password || !passwordConfirm) {
+    res.status(500).json({ message: '모든 항목을 입력해주세요.' });
   }
 
   if (password != passwordConfirm) {
-    errors.push({ message: '비밀번호가 일치하지 않습니다.' });
+    res.status(500).json({ message: '비밀번호가 일치하지 않습니다.' });
   }
 
   if (password.length < 6) {
-    errors.push({ message: '비밀번호는 최소 7자리 이상 입력해주세요.' });
+    res.status(500).json({ message: '비밀번호는 최소 7자리 이상 입력해주세요.' });
   }
-
-  if (errors.length > 0) {
-    res.render('signup', {
-      errors,
+  const user = await User.findOne({ email: email });
+  if (user) {
+    res.status(500).json({ message: '이미 존재하는 사용자입니다.' });
+  } else {
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const newUser = {
       email,
       name,
-      password,
-      passwordConfirm,
-    });
-  } else {
-    const user = await User.findOne({ email: email });
-    if (user) {
-      errors.push({ message: '이미 존재하는 사용자입니다.' });
-      res.render('signup', {
-        errors,
-        email,
-        name,
-        password,
-        passwordConfirm,
-      });
-    } else {
-      const newUser = new user({
-        email,
-        name,
-        password,
-      });
-
-      // ! 비밀번호 해싱 필요
-      // bcrypt.
+      password: hashedPassword,
+      admin: false,
+    };
+    try {
+      await User.create(newUser);
+      res.json({ message: '사용자가 정상적으로 등록되었습니다.' });
+    } catch (error) {
+      res.json({ error });
     }
   }
 });
