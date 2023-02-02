@@ -42,27 +42,24 @@ router.post('/signup', async (req, res) => {
 });
 
 // * 로그인 api
-router.post('/login', async (req, res, next) => {
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
   try {
-    passport.authenticate('jwt', (passportErr, user, info) => {
-      if (passportErr || !user) {
-        res.status(400).json({ message: info.message });
-        return;
-      }
-
-      req.login(user, { session: false }, (loginErr) => {
-        if (loginErr) {
-          res.send(loginErr);
-          return;
-        }
-      });
-
-      const token = jwt.sign({ id: user.id, email: user.email, name: user.name }, 'jwt-secret-key');
-      res.json({ token });
-    })(req, res);
-  } catch (err) {
-    console.error(err);
-    next(err);
+    const existingUser = await User.findOne({ email });
+    if (!existingUser) {
+      return res.status(404).json({ message: '없는 사용자 입니다.' });
+    }
+    const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
+    if (!isPasswordCorrect) {
+      return res.status(404).json({ message: '잘못된 비밀번호입니다.' });
+    }
+    const secret = process.env.JWT || 'eligance';
+    const token = jwt.sign({ email: existingUser.email, _id: existingUser._id, name: existingUser.name }, secret, {
+      expiresIn: '6h',
+    });
+    res.status(200).json({ token });
+  } catch (error) {
+    res.status(500).json({ error });
   }
 });
 
