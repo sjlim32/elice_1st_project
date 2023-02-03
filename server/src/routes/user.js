@@ -119,7 +119,7 @@ router.delete('/:user_id', async (req, res) => {
 
   try {
     await User.deleteOne({ _id: userId })
-    res.status(200).json({ message: '삭제가 완료되었습니다.'})
+    res.status(200).json({ message: '삭제가 완료되었습니다.' })
   } catch (error) {
     console.log(error)
     res.status(200).json({ message: '삭제에 실패했습니다.' })
