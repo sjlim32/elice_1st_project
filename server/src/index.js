@@ -1,6 +1,8 @@
 import express from 'express';
 import connect from './schemas/index.js';
 import userRouter from './routes/user.js';
+import userRouter from './routes/user.js';
+import productRouter from './routes/product.js';
 import CategoryRouter from './routes/category.js';
 //import passportConfig from './passport/index.js';
 //import passport from 'passport';
@@ -17,6 +19,8 @@ connect();
 
 //router
 app.use('/user', userRouter);
+app.use('/product', productRouter);
+app.use('/admin', adminRouter);
 app.use('/category', CategoryRouter);
 
 app.listen(5000, () => {
