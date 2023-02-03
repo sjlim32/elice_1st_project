@@ -21,9 +21,16 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
-  category: {
-    type: Schema.Types.ObjectId,
-    ref: 'Category',
+  gender: {
+    type: String,
+    required: true,
+  },
+  major_classification: {
+    type: String,
+    required: true,
+  },
+  minor_classification: {
+    type: String,
     required: true,
   },
 });
