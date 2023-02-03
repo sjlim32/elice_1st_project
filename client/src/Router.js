@@ -3,6 +3,7 @@ import LandingPage from './pages/LandingPage/LandingPage';
 import LoginPage from './pages/LoginPage';
 import Header from './pages/Layout/Header';
 import Footer from './pages/Layout/Footer';
+import Signup from './pages/Signup/Signup';
 
 const Router = () => {
   return (
@@ -14,6 +15,9 @@ const Router = () => {
         </Routes>
         <Routes>
           <Route path="/user/login" element={<LoginPage />} />
+        </Routes>
+        <Routes>
+          <Route path="/user/signup" element={<Signup />} />
         </Routes>
       </BrowserRouter>
       <Footer>Footer</Footer>
