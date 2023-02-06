@@ -92,6 +92,7 @@ export default function ProductList() {
           })}
         </ul>
       </MenuTab>
+
       <SubMenuTab>
         <ul className="tabs">
           {All_CATEGORY.find(
@@ -108,6 +109,7 @@ export default function ProductList() {
           ))}
         </ul>
       </SubMenuTab>
+
       <div className="contents">
         <ShowProduct datas={category} />
       </div>
