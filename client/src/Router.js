@@ -1,30 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LandingPage from './pages/LandingPage/LandingPage';
-import LoginPage from './pages/LoginPage';
-import Header from './pages/Layout/Header';
-import Footer from './pages/Layout/Footer';
-import Signup from './pages/Signup/Signup';
+import MyPage from './pages/MyPage/MyPage';
 
 const Router = () => {
   return (
-    <>
-      <Header />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-        </Routes>
-        <Routes>
-          <Route path="/user/login" element={<LoginPage />} />
-        </Routes>
-        <Routes>
-          <Route path="/user/signup" element={<Signup />} />
-        </Routes>
-      </BrowserRouter>
-      <Footer>Footer</Footer>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/user/:userid" element={<MyPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
 export default Router;
-
-// 관리자 , 일반 페이지 라우터 구분 코드 추가
