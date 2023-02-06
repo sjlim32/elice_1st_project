@@ -38,12 +38,11 @@ router.post('/', async (req, res) => {
 // 받아온 주문목록을 json 으로 전달한다.
 router.get('/:user_id', async (req, res) => {
     const userId = req.params.user_id;
-    const { user } = await User.findOne({ _id: userId })
 
     try {
-        // ! populate로 refactoring
-
-        res.status(200).json( orderList );
+        const orders = await User.findById(userId).populate("order")
+        const orderList = orders.order
+        res.status(200).json(orderList);
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: '주문목록을 받아오지 못했습니다.'});
