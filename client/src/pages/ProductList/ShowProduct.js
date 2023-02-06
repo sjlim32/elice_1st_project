@@ -1,28 +1,27 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-export default function ShowProduct({ currentTab, datas }) {
+export default function ShowProduct({ datas }) {
   const navigate = useNavigate();
   return (
     <ProductLists>
-      {datas &&
-        datas[currentTab].map(el => (
-          <ProductInfo
-            key={el._id}
-            onClick={() => {
-              navigate(`/product/${el._id}`);
-            }}
-          >
-            <img className="product-image" src={el.img} alt="product-Img" />
-            <p className="product-brand">{el.brand}</p>
-            <p className="product-name">{el.name}</p>
-            <p className="product-price">
-              <span className="sale-percentage">30%</span>
-              {el.price}
-            </p>
-            <p className="delivery-info">익일배송</p>
-          </ProductInfo>
-        ))}
+      {datas.map(el => (
+        <ProductInfo
+          key={el._id}
+          onClick={() => {
+            navigate(`/product/${el._id}`);
+          }}
+        >
+          <img className="product-image" src={el.img} alt="product-Img" />
+          <p className="product-brand">{el.brand}</p>
+          <p className="product-name">{el.name}</p>
+          <p className="product-price">
+            <span className="sale-percentage">30%</span>
+            {el.price}
+          </p>
+          <p className="delivery-info">익일배송</p>
+        </ProductInfo>
+      ))}
     </ProductLists>
   );
 }
