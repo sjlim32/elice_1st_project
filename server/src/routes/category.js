@@ -4,6 +4,7 @@ import Gender from '../schemas/gender';
 
 const router = Router();
 
+/** 카테고리 목록 전달 */
 router.get('/', async (req, res) => {
   const category = await Category.find({});
   const { gender } = await Gender.findOne({});
