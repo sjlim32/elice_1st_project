@@ -107,8 +107,7 @@ router.patch('/:user_id', async (req, res) => {
         address,
         phone,
         account,
-      },
-      {
+      }, {
         new: true,
       }
     );
