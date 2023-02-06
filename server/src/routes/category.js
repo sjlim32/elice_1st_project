@@ -14,9 +14,9 @@ router.get('/', async (req, res) => {
     (acc, { major_classification, minor_classification }) => {
       return { ...acc, [major_classification]: minor_classification };
     },
-    { gender }
+    { "성별": gender }
   );
   res.json(result);
 });
 
-export default Router;
+export default router;
