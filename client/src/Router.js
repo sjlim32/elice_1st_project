@@ -1,10 +1,27 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import LandingPage from './pages/LandingPage/LandingPage';
+import LoginPage from './pages/LoginPage';
+import Header from './pages/Layout/Header';
+import Footer from './pages/Layout/Footer';
+import Signup from './pages/Signup/Signup';
 
 const Router = () => {
   return (
-    <BrowserRouter>
-      <Routes>{/* <Route path="/" element={<Main />} /> */}</Routes>
-    </BrowserRouter>
+    <>
+      <Header />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+        </Routes>
+        <Routes>
+          <Route path="/user/login" element={<LoginPage />} />
+        </Routes>
+        <Routes>
+          <Route path="/user/signup" element={<Signup />} />
+        </Routes>
+      </BrowserRouter>
+      <Footer>Footer</Footer>
+    </>
   );
 };
 
