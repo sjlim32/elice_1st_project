@@ -7,5 +7,5 @@ const genderSchema = new Schema({
   }
 });
 
-const genderModel = model('Gender', genderSchema);
-export default genderModel;
+const gender = model('Gender', genderSchema);
+export default gender;

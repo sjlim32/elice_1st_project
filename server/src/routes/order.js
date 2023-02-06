@@ -42,9 +42,7 @@ router.get('/:user_id', async (req, res) => {
 
     try {
         // ! populate로 refactoring
-        const orderList = await user.map(id => {
-            Order.findById(id)
-        })
+
         res.status(200).json( orderList );
     } catch (error) {
         console.log(error)

@@ -4,7 +4,7 @@ import userRouter from './routes/user.js';
 import adminRouter from './routes/user.js';
 import productRouter from './routes/product.js';
 import categoryRouter from './routes/category.js';
-import orderRouter from './routes/order/js';
+import orderRouter from './routes/order.js';
 import admin from './middlewares/admin.js';
 //import passportConfig from './passport/index.js';
 //import passport from 'passport';
