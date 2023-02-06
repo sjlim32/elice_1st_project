@@ -22,6 +22,11 @@ const orderSchema = new Schema({
   },
   order_request: {
     type: String
+  },
+  status: {
+    type: String,
+    required: true,
+    default: "배송 준비 중"
   }
 },
   { timestamps: true }
