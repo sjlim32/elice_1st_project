@@ -1,9 +1,9 @@
 import express from 'express';
 import connect from './schemas/index.js';
 import userRouter from './routes/user.js';
-import userRouter from './routes/user.js';
+import adminRouter from './routes/user.js';
 import productRouter from './routes/product.js';
-import CategoryRouter from './routes/category.js';
+import categoryRouter from './routes/category.js';
 //import passportConfig from './passport/index.js';
 //import passport from 'passport';
 
@@ -21,7 +21,7 @@ connect();
 app.use('/user', userRouter);
 app.use('/product', productRouter);
 app.use('/admin', adminRouter);
-app.use('/category', CategoryRouter);
+app.use('/category', categoryRouter);
 
 app.listen(5000, () => {
   console.log('server is running');
