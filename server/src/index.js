@@ -1,10 +1,11 @@
 import express from 'express';
 import connect from './schemas/index.js';
 import userRouter from './routes/user.js';
-import userRouter from './routes/user.js';
+import adminRouter from './routes/user.js';
 import productRouter from './routes/product.js';
 import CategoryRouter from './routes/category.js';
 import admin from './middlewares/admin.js';
+
 //import passportConfig from './passport/index.js';
 //import passport from 'passport';
 
