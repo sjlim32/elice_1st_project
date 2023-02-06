@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
             // minor까지 들어오는 경우
             product = await Product.find({ gender, major_classification, minor_classification });
         }
-        res.json(product);
+        res.json({ products: product });
     } catch (error) {
         res.json({ message: error.message });
     }
