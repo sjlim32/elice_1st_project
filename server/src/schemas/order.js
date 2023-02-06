@@ -6,16 +6,26 @@ const orderSchema = new Schema({
     ref: 'User',
     required: true,
   },
-  product: {
+  products: {
     type: [Schema.Types.ObjectId],
     ref: 'Product',
     required: true,
+    default: [],
+  },
+  address: {
+    type: String,
+    requird: true,
   },
   total_price: {
     type: Number,
     required: true,
   },
-});
+  order_request: {
+    type: String
+  }
+},
+  { timestamps: true }
+);
 
 const Order = model('Order', orderSchema);
 export default Order;
