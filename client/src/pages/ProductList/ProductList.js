@@ -110,9 +110,7 @@ export default function ProductList() {
         </ul>
       </SubMenuTab>
 
-      <div className="contents">
-        <ShowProduct datas={category} />
-      </div>
+      <div className="contents">{/* <ShowProduct datas={category} /> */}</div>
     </Container>
   );
 }
@@ -179,9 +177,9 @@ const MenuTab = styled.div`
 `;
 
 const SubMenuTab = styled.div`
-  width: 95%;
-  margin: 50px auto;
-  font-size: 20px;
+  width: 70%;
+  margin: 10px auto;
+  font-size: 16px;
   text-align: center;
   font-weight: 600;
   > .tabs {
@@ -189,14 +187,15 @@ const SubMenuTab = styled.div`
     > li {
       width: 100%;
       text-align: center;
-      border: 1px solid #b1b1b1;
-      padding: 20px;
+      border-right: 1px solid #b1b1b1;
       cursor: pointer;
       color: #b1b1b1;
+      &:last-child {
+        border-right: none;
+      }
 
       &:hover {
         font-wight: 900;
-        border-bottom: none;
         color: black;
       }
     }
