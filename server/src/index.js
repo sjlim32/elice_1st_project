@@ -3,7 +3,8 @@ import connect from './schemas/index.js';
 import userRouter from './routes/user.js';
 import adminRouter from './routes/user.js';
 import productRouter from './routes/product.js';
-import categoryRouter from './routes/category.js';
+import CategoryRouter from './routes/category.js';
+import admin from './middlewares/admin.js';
 //import passportConfig from './passport/index.js';
 //import passport from 'passport';
 
@@ -20,9 +21,11 @@ connect();
 //router
 app.use('/user', userRouter);
 app.use('/product', productRouter);
-app.use('/admin', adminRouter);
-app.use('/category', categoryRouter);
+app.use('/admin', admin, adminRouter);
+app.use('/category', CategoryRouter);
 
-app.listen(5000, () => {
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
   console.log('server is running');
 });
