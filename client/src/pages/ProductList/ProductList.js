@@ -1,22 +1,39 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import all
 import styled from 'styled-components';
 import ShowProduct from './ShowProduct';
 
 export default function ProductList() {
   const [categoryTabMenu, setCategoryTabMenu] = useState([]);
   const [category, setCategory] = useState();
-  const [currentTab, setCurrentTab] = useState('의류'); // 현재 메뉴탭
   const [ScrollY, setScrollY] = useState(0); // 스크롤값 저장
   const [BtnToTop, setBtnToTop] = useState(false);
 
-  useEffect(() => {
-    axios.get('/data/productlist.json').then(res => {
-      setCategoryTabMenu(Object.keys(res.data));
-      setCategory(res.data);
-    });
-  }, []);
+
+
+  // axios request data
+  const [reqData, setReqData] = useState({
+    gender: '',
+    major_classification: '',
+    minor_classification: '',
+  });
+
+  // reqDataHandlers
+  const reqDataHandlers = e => {
+    setReqData({ ...reqData, [e.target.title]: e.target.id });
+  };
+
+  console.log(reqData);
+
+  // useEffect(() => {
+  //   axios.get('http://localhost:3000/product', reqData).then(res => {
+  //     setCategoryTabMenu(Object.keys(res.data));
+  //     setCategory(res.data);
+  //   });
+  // }, [reqData]);
+
+  // 맨 위로가기 기능
 
   const handleScroll = () => {
     setScrollY(window.pageYOffset); // window 스크롤 값저장
@@ -45,12 +62,12 @@ export default function ProductList() {
   return (
     <Container>
       <MainNav>
-        <span>
-          <Link to={ProductList}>여성</Link>
+        <span id="female" title="gender" onClick={reqDataHandlers}>
+          여성
         </span>
         <span>|</span>
-        <span>
-          <a>남성</a>
+        <span id="male" title="gender" onClick={reqDataHandlers}>
+          남성
         </span>
       </MainNav>
 
@@ -63,27 +80,55 @@ export default function ProductList() {
 
       <MenuTab>
         <ul className="tabs">
-          {categoryTabMenu.map((tab, index) => (
-            <li
-              onClick={() => {
-                setCurrentTab(tab);
-              }}
-              key={index}
-            >
-              {tab}
-            </li>
-          ))}
+          <li
+            id="clothes"
+            title="major_classification"
+            onClick={reqDataHandlers}
+          >
+            의류
+          </li>
+          <li id="shoes" title="major_classification" onClick={reqDataHandlers}>
+            신발
+          </li>
+          <li id="bags" title="major_classification" onClick={reqDataHandlers}>
+            가방
+          </li>
+          <li
+            id="accessory"
+            title="major_classification"
+            onClick={reqDataHandlers}
+          >
+            액세서리
+          </li>
         </ul>
         <div className="contents">
-          <ShowProduct
-            currentTab={currentTab && currentTab}
-            datas={category && category}
-          />
+          <ShowProduct currentTab={currentTab} datas={category && category} />
         </div>
       </MenuTab>
+      <SubMenuTab>
+        <ul className="tabs">
+          <li
+            id="clothes"
+            title="minor_classification"
+            onClick={reqDataHandlers}
+          >
+            티셔츠
+          </li>
+          <li id="shoes" title="minor_classification" onClick={reqDataHandlers}>
+            바지
+          </li>
+          <li id="bags" title="minor_classification" onClick={reqDataHandlers}>
+            양말
+          </li>
+        </ul>
+        <div className="contents">
+          <ShowProduct currentTab={currentTab} datas={category && category} />
+        </div>
+      </SubMenuTab>
     </Container>
   );
-}
+
+
 
 const Container = styled.div`
   margin-top: 90px;
@@ -147,6 +192,38 @@ const MenuTab = styled.div`
   }
 `;
 
+const SubMenuTab = styled.div`
+  width: 95%;
+  margin: 50px auto;
+  font-size: 20px;
+  text-align: center;
+  font-weight: 600;
+  > .tabs {
+    display: flex;
+    > li {
+      width: 100%;
+      text-align: center;
+      border: 1px solid #b1b1b1;
+      padding: 20px;
+      cursor: pointer;
+      color: #b1b1b1;
+
+      &:hover {
+        font-wight: 900;
+        border-bottom: none;
+        color: black;
+      }
+    }
+  }
+
+  > .contents {
+    text-align: center;
+    font-size: 70px;
+    border-top: none;
+    color: black;
+  }
+`;
+
 const MainNav = styled.div`
   width: 100%;
   border-bottom: 10px solid rgba(153, 164, 151, 1);
@@ -157,3 +234,43 @@ const MainNav = styled.div`
     padding: 5px;
   }
 `;
+
+const AllCATEGORY=[
+  {
+    "id": 1,
+    "major_classification": "의류",
+    "minor_classification": [
+      { "kor": "티셔츠" },
+      { "kor": "바지" },
+      { "kor": "양말" }
+    ]
+  },
+  {
+    "id": 2,
+    "major_classification": "가방",
+    "minor_classification": [
+      { "kor": "토트 백" },
+      { "kor": "숄더 백" },
+      { "kor": "클러치 백" }
+    ]
+  },
+  {
+    "id": 3,
+    "major_classification": "신발",
+    "minor_classification": [
+      { "kor": "구두" },
+      { "kor": "운동화" },
+      { "kor": "슬리퍼" }
+    ]
+  },
+  {
+    "id": 4,
+    "major_classification": "액세서리",
+    "minor_classification": [
+      { "kor": "목걸이" },
+      { "kor": "귀걸이" },
+      { "kor": "팔찌" }
+    ]
+  }
+]
+
