@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import StyledButton from '../../components/StyledButton';
+import jwt from 'jsonwebtoken';
 
 const DivStyle = styled.div`
   text-align: center;
@@ -71,10 +72,10 @@ function LoginPage() {
         email,
         password,
       });
-      //jwt 디코딩?
       const user = res.data;
       const jwtToken = user.token;
-      localStorage.setItem('userToken', jwtToken);
+      const decodedJwt = jwt.decode(jwtToken);
+      localStorage.setItem('userToken', decodedJwt);
       navigate('/');
     } catch (err) {
       alert(`${err.message}`);
