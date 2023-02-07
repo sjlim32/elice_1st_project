@@ -2,10 +2,16 @@ import { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-export default function OrderList({ data, reqAddOrderData }) {
+export default function OrderList({
+  data,
+  reqAddOrderData,
+  reqAddOrderDataHandlers,
+}) {
   const [orderData, setOrderData] = useState();
+  const [isToUpdate, setIsToUpdate] = useState(false);
 
   const addOrderHandler = () => {
+    setIsToUpdate(true);
     axios
       .post('http://localhost:3000', reqAddOrderData)
       .then(res => setOrderData(res.data));
@@ -29,6 +35,9 @@ export default function OrderList({ data, reqAddOrderData }) {
         {data.map(el => (
           <div key={el.order_id}>
             <p>{el.products}</p>
+            {isToUpdate && (
+              <input name="product" onChange={reqAddOrderDataHandlers()} />
+            )}
             <p>{el.total_price}</p>
             <p>{el.date}</p>
           </div>

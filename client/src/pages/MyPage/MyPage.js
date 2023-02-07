@@ -31,7 +31,10 @@ export default function MyPage() {
   };
 
   const reqAddOrderDataHandlers = e => {
-    setReqData({ ...reqData, [e.target.title]: e.target.id });
+    setReqAddOrderData({
+      ...reqAddOrderData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
@@ -70,7 +73,11 @@ export default function MyPage() {
           {orderList.length === 0 ? (
             '최근 주문내역이 없습니다.'
           ) : (
-            <OrderList data={orderList} reqAddOrderData={reqAddOrderData} />
+            <OrderList
+              data={orderList}
+              reqAddOrderData={reqAddOrderData}
+              reqAddOrderDataHandlers={reqAddOrderDataHandlers}
+            />
           )}
         </ShowList>
       )}
