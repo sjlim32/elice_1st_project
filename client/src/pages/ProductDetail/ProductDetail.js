@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import banner from '../../images/banner.png';
 import ProductDetailFooter from './ProductDetailFooter';
 
 export default function ProductDetail() {
-  // const [showDropdown, setShowDropdown] = useState(false); // 드롭다운
-
+  const { productId } = useParams();
   const [info, setInfo] = useState();
+
   useEffect(() => {
-    axios.get('/data/ProductDetail.json').then(res => {
+    axios.get(`http://localhost:5001/product/${productId}`).then(res => {
       setInfo(res.data);
     });
   }, []);
