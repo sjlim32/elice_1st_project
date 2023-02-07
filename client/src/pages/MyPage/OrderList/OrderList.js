@@ -30,7 +30,7 @@ export default function OrderList({
   };
 
   return (
-    <div>
+    <Container>
       <div>
         {data.map(el => (
           <div key={el.order_id}>
@@ -46,6 +46,44 @@ export default function OrderList({
       <button onClick={addOrderHandler}>주문추가하기</button>
       <button onClick={updateOrderHandler}>주문수정하기</button>
       <button onClick={cancelOrderHandler}>주문취소하기</button>
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  width: 100%;
+  background-color: #efefef;
+`;
+
+const SubTitles = styled.div`
+  width: 70%;
+  margin: 10px auto;
+  font-size: 16px;
+  text-align: center;
+  font-weight: 600;
+  > .tabs {
+    display: flex;
+    > li {
+      width: 100%;
+      text-align: center;
+      border-right: 1px solid #b1b1b1;
+      cursor: pointer;
+      color: #b1b1b1;
+      &:last-child {
+        border-right: none;
+      }
+
+      &:hover {
+        font-wight: 900;
+        color: black;
+      }
+    }
+  }
+
+  > .contents {
+    text-align: center;
+    font-size: 70px;
+    border-top: none;
+    color: black;
+  }
+`;
