@@ -4,17 +4,26 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Line from '../../components/line';
 import OrderList from './OrderList/OrderList';
+import MyInfoList from './MyInfoList/MyInfoList';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function MyPage() {
   const [customerInfo, setCustomerInfo] = useState('');
+  const [currentTab, setCurrentTab] = useState('');
   const [orderList, setOrderList] = useState('');
 
   const navigate = useNavigate();
 
   useEffect(() => {
     axios.get('/data/customerInfo.json').then(res => setCustomerInfo(res.data));
+    axios.get('/data/orderLists.json').then(res => setOrderList(res.data));
   }, []);
+
+  const getOrderList = () => {
+    axios.get('/data/orderLists.json').then(res => setOrderList(res.data));
+  };
+
+  console.log(orderList);
 
   return (
     <Container>
@@ -29,19 +38,34 @@ export default function MyPage() {
             onClick={() => {
               navigate(`/order/${customerInfo.id}`);
             }}
+            onMouseDown={(() => setCurrentTab('orderlist'), getOrderList)}
           >
             주문내역
           </li>
-          <li>내 정보 관리</li>
+          <li
+            onClick={() => {
+              setCurrentTab('myinfo');
+              setOrderList('');
+            }}
+          >
+            내 정보 관리
+          </li>
         </ul>
       </MenuTab>
       <Subtitle>
         <p>최근 주문 내역</p>
         <Line widthLength="60%" />
       </Subtitle>
-      <ShowList>
-        {orderList.length === 0 ? '최근 주문내역이 없습니다.' : <OrderList />}
-      </ShowList>
+      {currentTab === 'orderlist' && (
+        <ShowList>
+          {orderList.length === 0 ? '최근 주문내역이 없습니다.' : <OrderList />}
+        </ShowList>
+      )}
+      {currentTab === 'myinfo' && (
+        <ShowList>
+          <MyInfoList datas={customerInfo} />
+        </ShowList>
+      )}
     </Container>
   );
 }
