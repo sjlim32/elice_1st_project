@@ -11,6 +11,13 @@ export default function MyPage() {
   const [customerInfo, setCustomerInfo] = useState('');
   const [currentTab, setCurrentTab] = useState('');
   const [orderList, setOrderList] = useState('');
+  const [reqAddOrderData, setReqAddOrderData] = useState({
+    user_id: '',
+    products: '',
+    address: '',
+    total_price: '',
+    order_request: '',
+  });
 
   const navigate = useNavigate();
 
@@ -23,7 +30,9 @@ export default function MyPage() {
     axios.get('/data/orderLists.json').then(res => setOrderList(res.data));
   };
 
-  console.log(orderList);
+  const reqAddOrderDataHandlers = e => {
+    setReqData({ ...reqData, [e.target.title]: e.target.id });
+  };
 
   return (
     <Container>
@@ -58,7 +67,11 @@ export default function MyPage() {
       </Subtitle>
       {currentTab === 'orderlist' && (
         <ShowList>
-          {orderList.length === 0 ? '최근 주문내역이 없습니다.' : <OrderList />}
+          {orderList.length === 0 ? (
+            '최근 주문내역이 없습니다.'
+          ) : (
+            <OrderList data={orderList} reqAddOrderData={reqAddOrderData} />
+          )}
         </ShowList>
       )}
       {currentTab === 'myinfo' && (
