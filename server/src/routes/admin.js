@@ -2,6 +2,7 @@ import { Router } from 'express';
 import Product from '../schemas/product.js';
 import Gender from '../schemas/gender.js';
 import Category from '../schemas/category.js';
+import Order from '../schemas/order.js';
 
 const router = Router();
 
@@ -51,5 +52,36 @@ router.patch('/category', async (req, res) => {
     res.json({ message: error.message });
   }
 });
+
+// * 주문 목록 전체 보기
+
+router.get('/product', async (req, res) => {
+  try {
+    const orders = await Order.find({});
+    res.status(200).json(orders);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "목록을 불러오지 못했습니다." })
+  }
+})
+
+// * 배송 상태 수정하기
+
+router.patch('product/:order_id', async (req, res) => {
+  const orderId = req.params.order_id;
+  const { status } = req.body;
+
+  try {
+    const orderModify = await Order.findOneAndUpdate(orderId, {
+      status: status
+    }, {
+      returnNewDocument: true,
+    })
+    res.status(500).json(orderModify);
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: "배송 상태를 변경하지 못했습니다." })
+  }
+})
 
 export default router;
