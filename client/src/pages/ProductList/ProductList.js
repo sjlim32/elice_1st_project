@@ -21,11 +21,11 @@ export default function ProductList() {
     setReqData({ ...reqData, [e.target.title]: e.target.id });
   };
 
-  // useEffect(() => {
-  //   axios.get('http://localhost:3000/product', reqData).then(res => {
-  //     setCategory(res.data);
-  //   });
-  // }, [reqData]);
+  useEffect(() => {
+    axios.get('http://localhost:5001/product', reqData).then(res => {
+      setCategory(res.data.products);
+    });
+  }, [reqData]);
 
   // 맨 위로가기 기능
 
