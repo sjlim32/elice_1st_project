@@ -1,19 +1,12 @@
 import { Router } from 'express';
-import Category from '../schemas/category.js';
-import Gender from '../schemas/gender.js';
+import { getClassification, getGender } from '../controllers/category';
 
 const router = Router();
 
 /** 카테고리(분류) 목록 전달 */
-router.get('/classification', async (req, res) => {
-  const category = await Category.find({});
-  res.json({ category });
-});
+router.get('/classification', getClassification);
 
 /** 카테고리(성별) 목록 전달 */
-router.get('/gender', async (req, res) => {
-  const { gender } = await Gender.findOne({});
-  res.json({ gender });
-});
+router.get('/gender', getGender);
 
 export default router;
