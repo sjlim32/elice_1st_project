@@ -100,7 +100,6 @@ const WelcomeMsg = styled.div`
 
 const AccountIcon = styled(AccountCircleIcon)`
   color: rgba(153, 164, 151, 1);
-  font-size: 1000px;
 `;
 
 const MenuTab = styled.div`

@@ -31,18 +31,31 @@ export default function OrderList({
 
   return (
     <Container>
-      <div>
+      <OrderInfos>
         {data.map(el => (
-          <div key={el.order_id}>
-            <p>{el.products}</p>
-            {isToUpdate && (
-              <input name="product" onChange={reqAddOrderDataHandlers()} />
-            )}
-            <p>{el.total_price}</p>
-            <p>{el.date}</p>
+          <div className="order" key={el.order_id}>
+            <Infos>
+              <ul className="tabs">
+                <li>상품</li>
+                <li>주문 날짜</li>
+                <li>주문 정보</li>
+                <li>상태</li>
+              </ul>
+            </Infos>
+            <Infos>
+              <ul className="tabs">
+                <li className="each-item">{el.products}</li>
+                {isToUpdate && (
+                  <input name="product" onChange={reqAddOrderDataHandlers()} />
+                )}
+                <li className="each-item">{el.total_price}</li>
+                <li className="each-item">{el.date}</li>
+                <li className="each-item">{el.status}</li>
+              </ul>
+            </Infos>
           </div>
         ))}
-      </div>
+      </OrderInfos>
       <button onClick={addOrderHandler}>주문추가하기</button>
       <button onClick={updateOrderHandler}>주문수정하기</button>
       <button onClick={cancelOrderHandler}>주문취소하기</button>
@@ -52,11 +65,27 @@ export default function OrderList({
 
 const Container = styled.div`
   width: 100%;
-  background-color: #efefef;
+`;
+const OrderInfos = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  > .order {
+    margin-top: 20px;
+    padding: 15px;
+    height: 180px;
+    width: 60%;
+    border-radius: 20px;
+    background-color: #efefef;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
 `;
 
-const SubTitles = styled.div`
-  width: 70%;
+const Infos = styled.div`
+  width: 100%;
   margin: 10px auto;
   font-size: 16px;
   text-align: center;
@@ -66,17 +95,15 @@ const SubTitles = styled.div`
     > li {
       width: 100%;
       text-align: center;
-      border-right: 1px solid #b1b1b1;
-      cursor: pointer;
-      color: #b1b1b1;
+      border-right: 2px solid #373837;
+      color: #373837;
       &:last-child {
         border-right: none;
       }
-
-      &:hover {
-        font-wight: 900;
-        color: black;
-      }
+    }
+    > .each-item {
+      border: none;
+      font-weight: 600;
     }
   }
 
