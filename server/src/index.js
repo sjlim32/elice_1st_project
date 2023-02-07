@@ -1,4 +1,6 @@
 import express from 'express';
+import cors from 'cors';
+
 import connect from './schemas/index.js';
 import userRouter from './routes/user.js';
 import adminRouter from './routes/admin.js';
@@ -11,6 +13,13 @@ import admin from './middlewares/admin.js';
 
 const app = express();
 app.use(express.json());
+
+// cross-origin
+const corsConfig = {
+  origin: 'http://localhost:3000/',
+  credential: true,
+};
+app.use(cors(corsConfig));
 
 //DB connet
 connect();
@@ -26,7 +35,7 @@ app.use('/admin', admin, adminRouter);
 app.use('/category', categoryRouter);
 app.use('/order', orderRouter);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 app.listen(PORT, () => {
   console.log('server is running');
