@@ -26,6 +26,15 @@ export default function MyPage() {
     axios.get('/data/orderLists.json').then(res => setOrderList(res.data));
   }, []);
 
+  // useEffect(() => {
+  //   axios
+  //     .get('http://localhost:5001/user/:userId')
+  //     .then(res => setCustomerInfo(res.data));
+  //   axios
+  //     .get('http://localhost:5001/order/:userId')
+  //     .then(res => setOrderList(res.data));
+  // }, []);
+
   const getOrderList = () => {
     axios.get('/data/orderLists.json').then(res => setOrderList(res.data));
   };
