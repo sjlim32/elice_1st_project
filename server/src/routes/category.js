@@ -4,19 +4,16 @@ import Gender from '../schemas/gender.js';
 
 const router = Router();
 
-/** 카테고리 목록 전달 */
-router.get('/', async (req, res) => {
+/** 카테고리(분류) 목록 전달 */
+router.get('/classification', async (req, res) => {
   const category = await Category.find({});
-  const { gender } = await Gender.findOne({});
+  res.json({ category });
+});
 
-  // 데이터를 프론트에서 필요한 형태로 구조 변환
-  let result = category.reduce(
-    (acc, { major_classification, minor_classification }) => {
-      return { ...acc, [major_classification]: minor_classification };
-    },
-    { "성별": gender }
-  );
-  res.json(result);
+/** 카테고리(성별) 목록 전달 */
+router.get('/gender', async (req, res) => {
+  const { gender } = await Gender.findOne({});
+  res.json({ gender });
 });
 
 export default router;
