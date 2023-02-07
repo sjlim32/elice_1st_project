@@ -22,9 +22,13 @@ export default function ProductList() {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:5001/product', reqData).then(res => {
-      setCategory(res.data.products);
-    });
+    axios
+      .get(
+        `http://localhost:5001/product/${reqData.gender}/${reqData.major_classification}/${reqData.minor_classification}`
+      )
+      .then(res => {
+        setCategory(res.data.products);
+      });
   }, [reqData]);
 
   // 맨 위로가기 기능
@@ -100,11 +104,11 @@ export default function ProductList() {
           ).minor_classification.map((el, idx) => (
             <li
               key={idx}
-              id={el.kor}
+              id={el}
               title="minor_classification"
               onClick={reqDataHandlers}
             >
-              {el.kor}
+              {el}
             </li>
           ))}
         </ul>
@@ -224,33 +228,21 @@ const All_CATEGORY = [
   {
     id: 1,
     major_classification: '의류',
-    minor_classification: [{ kor: '티셔츠' }, { kor: '바지' }, { kor: '양말' }],
+    minor_classification: ['티셔츠', '바지', '양말'],
   },
   {
     id: 2,
     major_classification: '가방',
-    minor_classification: [
-      { kor: '토트 백' },
-      { kor: '숄더 백' },
-      { kor: '클러치 백' },
-    ],
+    minor_classification: ['토트백', '숄더백', '클러치백'],
   },
   {
     id: 3,
     major_classification: '신발',
-    minor_classification: [
-      { kor: '구두' },
-      { kor: '운동화' },
-      { kor: '슬리퍼' },
-    ],
+    minor_classification: ['구두', '운동화', '슬리퍼'],
   },
   {
     id: 4,
     major_classification: '액세서리',
-    minor_classification: [
-      { kor: '목걸이' },
-      { kor: '귀걸이' },
-      { kor: '팔찌' },
-    ],
+    minor_classification: ['목걸이', '귀걸이', '팔찌'],
   },
 ];

@@ -12,7 +12,7 @@ export default function ShowProduct({ datas }) {
             navigate(`/product/${el._id}`);
           }}
         >
-          <img className="product-image" src={el.img} alt="product-Img" />
+          <img className="product-image" src={el.image} alt="product-Img" />
           <p className="product-brand">{el.brand}</p>
           <p className="product-name">{el.name}</p>
           <p className="product-price">
