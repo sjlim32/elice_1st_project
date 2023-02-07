@@ -20,13 +20,13 @@ export default function OrderList() {
 
   const updateOrderHandler = () => {
     axios
-      .post('http://localhost:3000', reqAddOrderData)
+      .patch('http://localhost:3000', reqAddOrderData)
       .then(res => setOrderData(res.data));
   };
 
   const cancelOrderHandler = () => {
     axios
-      .post('http://localhost:3000', reqAddOrderData)
+      .delete('http://localhost:3000', reqAddOrderData)
       .then(res => setOrderData(res.data));
   };
 
