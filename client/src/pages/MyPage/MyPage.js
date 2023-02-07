@@ -35,10 +35,6 @@ export default function MyPage() {
   //     .then(res => setOrderList(res.data));
   // }, []);
 
-  const getOrderList = () => {
-    axios.get('/data/orderLists.json').then(res => setOrderList(res.data));
-  };
-
   const reqAddOrderDataHandlers = e => {
     setReqAddOrderData({
       ...reqAddOrderData,
@@ -55,22 +51,8 @@ export default function MyPage() {
       </WelcomeMsg>
       <MenuTab>
         <ul className="tabs">
-          <li
-            onClick={() => {
-              navigate(`/order/${customerInfo.id}`);
-            }}
-            onMouseDown={(() => setCurrentTab('orderlist'), getOrderList)}
-          >
-            주문내역
-          </li>
-          <li
-            onClick={() => {
-              setCurrentTab('myinfo');
-              setOrderList('');
-            }}
-          >
-            내 정보 관리
-          </li>
+          <li onMouseDown={() => setCurrentTab('orderlist')}>주문내역</li>
+          <li onMouseDown={() => setCurrentTab('myinfo')}>내 정보 관리</li>
         </ul>
       </MenuTab>
       <Subtitle>
