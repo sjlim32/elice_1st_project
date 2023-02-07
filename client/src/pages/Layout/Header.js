@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
@@ -62,7 +63,7 @@ function Nav() {
       <ul>
         <GenderStyle>
           <li style={{ marginLeft: '50px' }}>
-            <a href="/">여성</a>
+            <a href="/product">여성</a>
           </li>
         </GenderStyle>
         <GenderStyle>
@@ -70,7 +71,7 @@ function Nav() {
         </GenderStyle>
         <GenderStyle>
           <li>
-            <a href="/">남성</a>
+            <a href="/product">남성</a>
           </li>
         </GenderStyle>
       </ul>
@@ -80,8 +81,21 @@ function Nav() {
 }
 
 function Icon() {
+  // const [isLogin, setisLogin] = useState(false);
+  // const navigate = useNavigate();
+  // //로그인 여부에 따른 라우팅
+  // useEffect(() => {
+  //   try {
+  //     localStorage.getItem('userToken');
+  //     setisLogin(true);
+  //     navigate('/user/mypage');
+  //   } catch (err) {
+  //     navigate('/user/signup');
+  //   }
+  // }, []);
+
   function moveHandler() {
-    window.location.href = '/user/login';
+    window.location.href = '/user/signup';
   }
 
   return (
