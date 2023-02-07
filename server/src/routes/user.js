@@ -8,17 +8,13 @@ const router = Router();
 
 // * 회원가입 api
 router.post('/signup', async (req, res) => {
-  const { email, name, password, passwordConfirm } = req.body;
+  const { email, name, password, address, contact } = req.body;
 
-  if (!email || !name || !password || !passwordConfirm) {
+  if (!email || !name || !password || address || contact) {
     res.status(500).json({ message: '모든 항목을 입력해주세요.' });
   }
 
-  if (password != passwordConfirm) {
-    res.status(500).json({ message: '비밀번호가 일치하지 않습니다.' });
-  }
-
-  if (password.length < 6) {
+  if (password.length < 7) {
     res.status(500).json({ message: '비밀번호는 최소 7자리 이상 입력해주세요.' });
   }
   const user = await User.findOne({ email: email });
@@ -80,8 +76,7 @@ router.get('/:user_id', async (req, res) => {
       name: user.name,
       password: user.password,
       address: user.address,
-      phone: user.phone,
-      account: user.account,
+      contact: user.contact,
     };
     res.status(200).json(userInfo);
   } catch (error) {
@@ -93,7 +88,7 @@ router.get('/:user_id', async (req, res) => {
 // * 회원 정보 수정
 router.patch('/:user_id', async (req, res) => {
   const userId = req.params.user_id;
-  const { email, name, password, address, phone, account } = req.body;
+  const { email, name, password, address, contact } = req.body;
 
   const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -105,9 +100,9 @@ router.patch('/:user_id', async (req, res) => {
         name,
         password: hashedPassword,
         address,
-        phone,
-        account,
-      }, {
+        contact,
+      },
+      {
         new: true,
       }
     );
@@ -127,7 +122,7 @@ router.delete('/:user_id', async (req, res) => {
     res.status(200).json({ message: '삭제가 완료되었습니다.' });
   } catch (error) {
     console.log(error);
-    res.status(200).json({ message: '삭제에 실패했습니다.' });
+    res.json({ message: '삭제에 실패했습니다.' });
   }
 });
 

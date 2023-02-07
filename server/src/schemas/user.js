@@ -18,14 +18,19 @@ const userSchema = new Schema(
       type: Boolean,
       required: true,
     },
-    phone: String,
+    contact: {
+      type: String,
+      required: true,
+    },
     order: {
       type: [Schema.Types.ObjectId],
       ref: 'Order',
       default: [],
     },
-    account: String,
-    address: String,
+    address: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
