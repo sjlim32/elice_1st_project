@@ -22,7 +22,7 @@ export default function SignupForm() {
   const { email, password, confirmPassword, name, contact, address } =
     inputValue;
 
-  // 유효성확인_버튼활성화 (임시)
+  // 유효성확인_버튼활성화
   const activateButton =
     name.length >= 2 &&
     password.length >= 6 &&
@@ -51,8 +51,7 @@ export default function SignupForm() {
     let confirmPw = e.target.value;
     setInputValue({ ...inputValue, confirmPassword: confirmPw });
     confirmPw === password
-      ? // confirmPassword === password
-        setConfirmPwMsg('')
+      ? setConfirmPwMsg('')
       : setConfirmPwMsg('비밀번호가 일치하지 않습니다.');
   };
 
@@ -66,33 +65,25 @@ export default function SignupForm() {
 
   const handleSignup = e => {
     e.preventDefault();
-    console.log(email);
-    console.log(name);
-    console.log(password);
-    console.log(confirmPassword);
+    axios
+      .post('http://localhost:5001/user/signup', {
+        email: email,
+        name: name,
+        password: password,
+        address: address,
+        phone: contact,
+      })
+      .then(res => {
+        alert(res.data.message);
+        navigate('/user/login');
+      })
+      .catch(error => {
+        alert(error.response.data.message);
+      });
   };
 
-  // const handleSignup =  e => {
-  //   e.preventDefault();
-  //    axios
-  //     .post('http://localhost:3000/user/signup', {
-  //       email: email,
-  //       name: name,
-  //       password: password,
-  //       password_confirm: confirmPassword,
-  //     })
-  //     .then(res => {
-  //       alert(res.message);
-  //       navigate('/user/login');
-  //       console.log(res);
-  //     })
-  //     .catch(error => {
-  //       alert(error.response.data.message);
-  //     });
-  // };
-
   return (
-    <form>
+    <form onSubmit={handleSignup}>
       <div>
         <label htmlFor="email">이메일</label>
         <div className="form-field">
@@ -186,11 +177,7 @@ export default function SignupForm() {
           />
         </div>
       </div>
-      <button
-        className="sign-up-btn "
-        disabled={!activateButton}
-        onSubmit={handleSignup}
-      >
+      <button className="sign-up-btn " disabled={!activateButton} type="submit">
         이메일로 회원가입
       </button>
     </form>
