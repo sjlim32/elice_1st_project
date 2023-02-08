@@ -27,7 +27,7 @@ export default function UpdateInfoModal({ setIsToUpdate, orderId }) {
     <Modal>
       <form onSubmit={submitHandler}>
         <div>
-          <label htmlFor="email">주소</label>
+          <label htmlFor="address">주소</label>
           <div className="form-field">
             <input
               required
@@ -40,7 +40,7 @@ export default function UpdateInfoModal({ setIsToUpdate, orderId }) {
           </div>
         </div>
         <div>
-          <label htmlFor="email">연락처</label>
+          <label htmlFor="phone">연락처</label>
           <div className="form-field">
             <input
               required
@@ -52,15 +52,22 @@ export default function UpdateInfoModal({ setIsToUpdate, orderId }) {
             />
           </div>
         </div>
-        <button>수정완료</button>
+        <StyledButton>수정완료</StyledButton>
       </form>
     </Modal>
   );
 }
 
 const Modal = styled.div`
-  width: 100%;
+  position: absolute;
+  top: 450px;
+  right: 320px;
+  width: 800px;
+  height: 500px;
   margin: 30px 0px;
+  background-color: white;
+  border-radius: 20px;
+  border: 1px solid gray;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -71,7 +78,6 @@ const Modal = styled.div`
     height: 180px;
     width: 50%;
     border-radius: 20px;
-    background-color: #efefef;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -82,11 +88,33 @@ const Modal = styled.div`
       flex-direction: row;
       justify-content: space-around;
       align-items: space-around;
+      > label {
+        font-weight: 900;
+      }
       > .form-field {
         > input {
           width: 300px;
         }
       }
     }
+  }
+`;
+
+const StyledButton = styled.button`
+  background-color: rgba(153, 164, 151, 1);
+  color: rgb(59, 59, 59);
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  height: 35px;
+  padding: 5px;
+  width: 150px;
+  text-align: center;
+  transition: 0.25s;
+  &:hover {
+    cursor: pointer;
+    background-color: gray;
+    color: white;
   }
 `;
