@@ -1,6 +1,6 @@
 import Product from '../schemas/product.js';
 
-
+// * 상품 목록
 export const getProducts = async (req, res) => {
     const { gender, major_classification, minor_classification } = req.query;
 
@@ -26,6 +26,7 @@ export const getProducts = async (req, res) => {
     }
 }
 
+// * 상품 상세
 export const getProductDetails = async (req, res) => {
     const productId = req.params;
     try {
