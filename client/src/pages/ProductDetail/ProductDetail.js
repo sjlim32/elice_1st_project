@@ -10,11 +10,21 @@ export default function ProductDetail() {
   const { productId } = useParams();
   const [info, setInfo] = useState();
 
+  // useEffect(() => {
+  //   axios.get(`http://localhost:5001/product/${productId}`).then(res => {
+  //     setInfo(res.data);
+  //   });
+  // }, []);
+
   useEffect(() => {
-    axios.get(`http://localhost:5001/product/${productId}`).then(res => {
+    axios.get('/data/ProductDetail.json').then(res => {
       setInfo(res.data);
     });
   }, []);
+
+  const addItemToCart = () => {
+    alert('hi');
+  };
 
   return (
     <Container>
@@ -27,6 +37,7 @@ export default function ProductDetail() {
             <p className="product-brand">{info && info.company}</p>
             <p className="product-name">{info && info.name}</p>
             <p className="product-price">
+              ₩
               {info &&
                 info.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
             </p>
@@ -37,7 +48,7 @@ export default function ProductDetail() {
           </div>
           <div className="buttons">
             <button className="btn-admin-only">변경사항 저장하기</button>
-            <button>장바구니</button>
+            <button onClick={addItemToCart}>장바구니</button>
           </div>
         </div>
       </ProductSummary>
