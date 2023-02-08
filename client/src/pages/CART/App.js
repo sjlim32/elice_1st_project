@@ -4,35 +4,35 @@ import styled from 'styled-components';
 import ProductItem from './Cart';
 
 function Cart() {
-  // const data = [
-  //   {
-  //     _id: "63e09b3f5d240411b3c6cedd",
-  //     name: "상품 3",
-  //     price: 1300,
-  //     size: "free",
-  //     image: "이미지 3",
-  //     count: 1,
-  //   },
+  const data = [
+    {
+      _id: '63e09b3f5d240411b3c6cedd',
+      name: '상품 3',
+      price: 1300,
+      size: 'free',
+      image: '이미지 3',
+      count: 1,
+    },
 
-  //   {
-  //     _id: "63e0aa360cf5b0896a027376",
-  //     name: "상품 1",
-  //     price: 1100,
-  //     size: "free",
-  //     image: "이미지 1",
-  //     count: 1,
-  //   },
+    {
+      _id: '63e0aa360cf5b0896a027376',
+      name: '상품 1',
+      price: 1100,
+      size: 'free',
+      image: '이미지 1',
+      count: 1,
+    },
 
-  //   {
-  //     _id: "63e09d365d240411b3c6ceff",
-  //     name: "상품 20",
-  //     price: 12000,
-  //     size: "free",
-  //     image: "이미지 20",
-  //     count: 1,
-  //   },
-  // ];
-  // localStorage.setItem("cart", JSON.stringify(data));
+    {
+      _id: '63e09d365d240411b3c6ceff',
+      name: '상품 20',
+      price: 12000,
+      size: 'free',
+      image: '이미지 20',
+      count: 1,
+    },
+  ];
+  localStorage.setItem('cart', JSON.stringify(data));
 
   const [productList, setProductList] = useState(
     JSON.parse(localStorage.getItem('cart')) || []
@@ -55,8 +55,6 @@ function Cart() {
     setProductList([]);
   };
 
-  // api와 함께 수정해야함
-  // 일단 모두 보내고 백엔드에서 핸들링 하는 식으로 해야할듯...
   const handleOrder = () => {
     // axios.post(
     //   "http://localhost:5001/order",
@@ -112,7 +110,7 @@ function Cart() {
             setProductList={setProductList}
             setCheckItems={setCheckItems}
             checkItems={checkItems}
-          ></ProductItem>
+          />
         ))}
         <TotalContainer>
           <TotalCount>총 {totalCount}개</TotalCount>
