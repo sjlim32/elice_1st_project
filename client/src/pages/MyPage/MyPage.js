@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import Line from '../../components/line';
@@ -11,7 +11,7 @@ export default function MyPage() {
   const [customerInfo, setCustomerInfo] = useState('');
   const [currentTab, setCurrentTab] = useState('');
   const [orderList, setOrderList] = useState('');
-
+  const { userid } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,6 +19,7 @@ export default function MyPage() {
     axios.get('/data/orderLists.json').then(res => setOrderList(res.data));
   }, []);
 
+  console.log(userid);
   // useEffect(() => {
   //   axios
   //     .get('http://localhost:5001/user/:userId')
