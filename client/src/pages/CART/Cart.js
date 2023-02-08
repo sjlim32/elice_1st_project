@@ -38,59 +38,75 @@ function ProductItem({
 
   return (
     <Container>
-      <Check
-        type="checkbox"
-        checked={checkItems.includes(id)}
-        onChange={e => {
-          handleSingleCheck(e.target.checked, id);
-        }}
-      />
-      <ProductImage src={image} alt={name} />
-      <Name>{name}</Name>
-      <Count type="number" value={count} onChange={handleCount} min={0} />
-      <Size>{size}</Size>
-      <Price>{price}</Price>
-      <Delete onClick={handleDelete}>삭제</Delete>
+      <Item>
+        <Check
+          type="checkbox"
+          checked={checkItems.includes(id)}
+          onChange={e => {
+            handleSingleCheck(e.target.checked, id);
+          }}
+        />
+      </Item>
+      <Item>
+        <ProductImage src={image} alt={name} />
+      </Item>
+      <Item>{name}</Item>
+      <Item>
+        <Count type="number" value={count} onChange={handleCount} min={0} />
+      </Item>
+      <Item>{size}</Item>
+      <Item>{price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</Item>
+      <Item>
+        <StyledButton onClick={handleDelete}>삭제</StyledButton>
+      </Item>
     </Container>
   );
 }
 
-const Container = styled.div`
-  width: 100%;
+const Container = styled.ul`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  font-size: 20px;
+  width: 100%;
+  height: 200px;
+`;
+
+const Item = styled.li`
+  font-size: 18px;
+  font-weight: 400;
+  width: 140px;
   text-align: center;
-  margin-bottom: 20px;
 `;
 const Check = styled.input`
-  zoom: 2;
+  zoom: 1.5;
 `;
 const ProductImage = styled.img`
   width: 122px;
   height: 122px;
-  border: 1px solid;
+  text-align: center;
 `;
 const Count = styled.input`
   width: 42px;
   font-size: 20px;
   zoom: 1.2;
+  text-align: center;
 `;
-const Name = styled.div`
-  width: 122px;
-`;
-const Size = styled.div`
-  width: 84px;
-`;
-const Price = styled.div`
-  width: 56px;
-`;
-const Delete = styled.button`
-  width: 56px;
-  font-size: 20px;
-  cursor: pointer;
-  background-color: #8c8788;
-  border-radius: 8px;
+
+const StyledButton = styled.button`
+  background-color: rgba(153, 164, 151, 1);
+  color: rgb(59, 59, 59);
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  width: 80px;
+  border-radius: 15px;
+  padding-block: 5px;
+  text-align: center;
+  transition: 0.25s;
+  &:hover {
+    cursor: pointer;
+    background-color: gray;
+    color: white;
+  }
 `;
 export default ProductItem;
