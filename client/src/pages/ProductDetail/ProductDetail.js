@@ -23,7 +23,8 @@ export default function ProductDetail() {
   }, []);
 
   const addItemToCart = () => {
-    alert('hi');
+    localStorage.setItem('cart', JSON.stringify(info));
+    alert('장바구니에 추가되었습니다.');
   };
 
   return (
