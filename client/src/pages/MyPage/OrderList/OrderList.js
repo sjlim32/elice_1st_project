@@ -7,10 +7,6 @@ export default function OrderList({ data }) {
   const [orderData, setOrderData] = useState();
   const [isToUpdate, setIsToUpdate] = useState(false);
 
-  const addOrderHandler = () => {
-    axios.post('http://localhost:3000').then(res => setOrderData(res.data));
-  };
-
   const updateOrderHandler = () => {
     setIsToUpdate(true);
   };
@@ -23,6 +19,7 @@ export default function OrderList({ data }) {
 
   return (
     <Container>
+      <NewButton onClick={updateOrderHandler}>배송지 정보 수정하기</NewButton>
       <OrderInfos>
         {data.map(el => (
           <div className="order" key={el.order_id}>
@@ -67,8 +64,6 @@ export default function OrderList({ data }) {
       ) : (
         ''
       )}
-      <StyledButton onClick={addOrderHandler}>주문추가하기</StyledButton>
-      <StyledButton onClick={updateOrderHandler}>배송지 정보 수정</StyledButton>
     </Container>
   );
 }
@@ -80,6 +75,7 @@ const OrderInfos = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
   > .order {
     margin-top: 20px;
     padding: 15px;
@@ -144,4 +140,11 @@ const StyledButton = styled.button`
     background-color: gray;
     color: white;
   }
+`;
+
+const NewButton = styled(StyledButton)`
+  color: rgb(59, 59, 59);
+  background-color: white;
+  width: 200px;
+  border: 1px solid rgba(153, 164, 151, 1);
 `;
