@@ -7,10 +7,6 @@ export default function OrderList({ data }) {
   const [orderData, setOrderData] = useState();
   const [isToUpdate, setIsToUpdate] = useState(false);
 
-  const addOrderHandler = () => {
-    axios.post('http://localhost:3000').then(res => setOrderData(res.data));
-  };
-
   const updateOrderHandler = () => {
     setIsToUpdate(true);
   };
@@ -67,7 +63,7 @@ export default function OrderList({ data }) {
       ) : (
         ''
       )}
-      <StyledButton onClick={addOrderHandler}>주문추가하기</StyledButton>
+
       <StyledButton onClick={updateOrderHandler}>배송지 정보 수정</StyledButton>
     </Container>
   );
