@@ -69,7 +69,6 @@ export default function OrderList({ data }) {
       )}
       <StyledButton onClick={addOrderHandler}>주문추가하기</StyledButton>
       <StyledButton onClick={updateOrderHandler}>배송지 정보 수정</StyledButton>
-      {/* 회원정보로 넘어가기 */}
     </Container>
   );
 }

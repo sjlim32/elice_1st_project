@@ -26,27 +26,31 @@ export default function UpdateInfoModal({ setIsToUpdate, orderId }) {
   return (
     <Modal>
       <form onSubmit={submitHandler}>
-        <label htmlFor="email">주소</label>
-        <div className="form-field">
-          <input
-            required
-            id="address"
-            type="text"
-            name="address"
-            onChange={inputhandler}
-            placeholder="새로운 배송지 주소를 입력해주세요"
-          />
+        <div>
+          <label htmlFor="email">주소</label>
+          <div className="form-field">
+            <input
+              required
+              id="address"
+              type="text"
+              name="address"
+              onChange={inputhandler}
+              placeholder="새로운 배송지 주소를 입력해주세요"
+            />
+          </div>
         </div>
-        <label htmlFor="email">연락처</label>
-        <div className="form-field">
-          <input
-            required
-            id="phone"
-            type="text"
-            name="phone"
-            onChange={inputhandler}
-            placeholder="배송받으실 분의 연락처를 입력해주세요"
-          />
+        <div>
+          <label htmlFor="email">연락처</label>
+          <div className="form-field">
+            <input
+              required
+              id="phone"
+              type="text"
+              name="phone"
+              onChange={inputhandler}
+              placeholder="배송받으실 분의 연락처를 입력해주세요"
+            />
+          </div>
         </div>
         <button>수정완료</button>
       </form>
@@ -61,4 +65,28 @@ const Modal = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  > form {
+    margin-top: 20px;
+    padding: 15px;
+    height: 180px;
+    width: 50%;
+    border-radius: 20px;
+    background-color: #efefef;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    > div {
+      display: flex;
+      width: 400px;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: space-around;
+      > .form-field {
+        > input {
+          width: 300px;
+        }
+      }
+    }
+  }
 `;
