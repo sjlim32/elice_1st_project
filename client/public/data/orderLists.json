@@ -4,7 +4,7 @@
     "products": "가방3",
     "total_price": 2000000,
     "date": "2023/02/23",
-    "status": "배송준비"
+    "status": "배송완료"
   },
   {
     "order_id": 2,

@@ -55,10 +55,18 @@ export default function MyPage() {
           <li onMouseDown={() => setCurrentTab('myinfo')}>내 정보 관리</li>
         </ul>
       </MenuTab>
-      <Subtitle>
-        <p>최근 주문 내역</p>
-        <Line widthLength="60%" />
-      </Subtitle>
+      {currentTab === 'orderlist' && (
+        <Subtitle>
+          <p>최근 주문 내역</p>
+          <Line widthLength="60%" />
+        </Subtitle>
+      )}
+      {currentTab === 'myinfo' && (
+        <Subtitle>
+          <p>나의 정보 관리</p>
+          <Line widthLength="60%" />
+        </Subtitle>
+      )}
       {currentTab === 'orderlist' && (
         <ShowList>
           {orderList.length === 0 ? (
