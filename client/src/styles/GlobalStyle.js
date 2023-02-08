@@ -15,6 +15,9 @@ a{
 body{
       font-family: 'IBM Plex Sans KR', sans-serif;
     }
+input[type='number']::-webkit-inner-spin-button {
+    opacity: 1;
+  }
 
 `;
 
