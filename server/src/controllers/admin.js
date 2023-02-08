@@ -51,7 +51,7 @@ export const modifyCategory = async (req, res) => {
 }
 
 // * 전체 주문목록 조회
-export const findAllOrder = async (req, res) => {
+export const getAllOrder = async (req, res) => {
     try {
         const orders = await Order.find({});
         res.status(200).json(orders);
