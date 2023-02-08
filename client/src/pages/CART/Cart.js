@@ -72,7 +72,7 @@ const Container = styled.ul`
 `;
 
 const Item = styled.li`
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 400;
   width: 140px;
   text-align: center;

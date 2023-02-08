@@ -163,7 +163,8 @@ const MainDiv = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 30px;
+  font-size: 25px;
+  padding: 0px 30px;
   font-weight: 600;
   margin-bottom: 25px;
   align-self: flex-start;
@@ -193,8 +194,8 @@ const Info = styled.ul`
   margin-bottom: 20px;
 `;
 const Item = styled.li`
-  font-size: 22px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 600;
   width: 140px;
   text-align: center;
 `;
