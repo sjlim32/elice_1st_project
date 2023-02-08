@@ -1,26 +1,18 @@
 import { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import UpdateInfoModal from './UpdateInfoModal';
 
-export default function OrderList({
-  data,
-  reqAddOrderData,
-  reqAddOrderDataHandlers,
-}) {
+export default function OrderList({ data }) {
   const [orderData, setOrderData] = useState();
   const [isToUpdate, setIsToUpdate] = useState(false);
 
   const addOrderHandler = () => {
-    setIsToUpdate(true);
-    axios
-      .post('http://localhost:3000', reqAddOrderData)
-      .then(res => setOrderData(res.data));
+    axios.post('http://localhost:3000').then(res => setOrderData(res.data));
   };
 
   const updateOrderHandler = () => {
-    axios
-      .patch(`http://localhost:5001/order/${data.order_id}`) // path에 orderid추가하기
-      .then(res => setOrderData(res.data));
+    setIsToUpdate(true);
   };
 
   const cancelOrderHandler = () => {
@@ -37,8 +29,8 @@ export default function OrderList({
             <Infos>
               <ul className="tabs">
                 <li>상품</li>
+                <li>총 가격</li>
                 <li>주문 날짜</li>
-                <li>주문 정보</li>
                 <li>배송 상태</li>
                 <li>주문 취소</li>
               </ul>
@@ -46,10 +38,11 @@ export default function OrderList({
             <Infos>
               <ul className="tabs">
                 <li className="each-item">{el.products}</li>
-                {isToUpdate && (
-                  <input name="product" onChange={reqAddOrderDataHandlers()} />
-                )}
-                <li className="each-item">{el.total_price}</li>
+                <li className="each-item">
+                  {el.total_price
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </li>
                 <li className="each-item">{el.date}</li>
                 <li className="each-item">{el.status}</li>
                 <li>
@@ -66,6 +59,14 @@ export default function OrderList({
           </div>
         ))}
       </OrderInfos>
+      {isToUpdate ? (
+        <UpdateInfoModal
+          setIsToUpdate={setIsToUpdate}
+          orderId={data.order_id}
+        />
+      ) : (
+        ''
+      )}
       <StyledButton onClick={addOrderHandler}>주문추가하기</StyledButton>
       <StyledButton onClick={updateOrderHandler}>배송지 정보 수정</StyledButton>
       {/* 회원정보로 넘어가기 */}

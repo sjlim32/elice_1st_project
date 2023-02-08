@@ -11,13 +11,6 @@ export default function MyPage() {
   const [customerInfo, setCustomerInfo] = useState('');
   const [currentTab, setCurrentTab] = useState('');
   const [orderList, setOrderList] = useState('');
-  const [reqAddOrderData, setReqAddOrderData] = useState({
-    user_id: '',
-    products: '',
-    address: '',
-    total_price: '',
-    order_request: '',
-  });
 
   const navigate = useNavigate();
 
@@ -34,13 +27,6 @@ export default function MyPage() {
   //     .get('http://localhost:5001/order/:userId')
   //     .then(res => setOrderList(res.data));
   // }, []);
-
-  const reqAddOrderDataHandlers = e => {
-    setReqAddOrderData({
-      ...reqAddOrderData,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   return (
     <Container>
@@ -72,11 +58,7 @@ export default function MyPage() {
           {orderList.length === 0 ? (
             '최근 주문내역이 없습니다.'
           ) : (
-            <OrderList
-              data={orderList}
-              reqAddOrderData={reqAddOrderData}
-              reqAddOrderDataHandlers={reqAddOrderDataHandlers}
-            />
+            <OrderList data={orderList} />
           )}
         </ShowList>
       )}
