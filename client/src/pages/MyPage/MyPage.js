@@ -19,7 +19,6 @@ export default function MyPage() {
     axios.get('/data/orderLists.json').then(res => setOrderList(res.data));
   }, []);
 
-  console.log(userid);
   // useEffect(() => {
   //   axios
   //     .get('http://localhost:5001/user/:userId')
