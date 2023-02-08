@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Line from '../../components/line';
 
 import ProductItem from './Cart';
 
@@ -118,9 +119,12 @@ function Cart() {
               checkItems={checkItems}
             />
           ))}
+          <Line widthLength="95%" />
           <TotalContainer>
             <TotalCount>총 {totalCount}개</TotalCount>
-            <TotalPrice>{totalPrice} KRW</TotalPrice>
+            <TotalPrice>
+              {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} KRW
+            </TotalPrice>
           </TotalContainer>
           <ButtonWrapper>
             <DeleteButton
@@ -198,9 +202,9 @@ const Item = styled.li`
 const TotalContainer = styled.div`
   width: 90%;
   display: flex;
-  border-top: 4px solid;
   margin: 30px auto;
-  font-size: 32px;
+  font-size: 20px;
+  font-weight: 500;
 `;
 
 const TotalCount = styled.span`
@@ -220,19 +224,35 @@ const ButtonWrapper = styled.div`
 const OrderButton = styled.button`
   width: 200px;
   height: 50px;
-  font-size: 28px;
-  background-color: transparent;
-  border-radius: 8px;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 15px;
+  border: none;
   cursor: pointer;
-  background-color: #8c8788;
+  background-color: rgba(153, 164, 151, 1);
+  color: rgb(59, 59, 59);
+  &:hover {
+    cursor: pointer;
+    background-color: gray;
+    color: white;
+  }
 `;
 
 const DeleteButton = styled.button`
   width: 200px;
   height: 50px;
-  font-size: 28px;
-  border-radius: 8px;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 15px;
+  border: none;
   cursor: pointer;
-  background-color: #8c8788;
+  background-color: rgba(153, 164, 151, 1);
+  color: rgb(59, 59, 59);
+  &:hover {
+    cursor: pointer;
+    background-color: gray;
+    color: white;
+  }
 `;
+
 export default Cart;
