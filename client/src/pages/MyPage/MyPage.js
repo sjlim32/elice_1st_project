@@ -16,10 +16,10 @@ export default function MyPage() {
 
   useEffect(() => {
     axios.get('/data/customerInfo.json').then(res => setCustomerInfo(res.data));
-    // axios.get('/data/orderLists.json').then(res => setOrderList(res.data));
+    // axios.get('/data/orderLists.json').then(res => setOrderList(res.data));  =>  전체주문내역으로 보기
     axios
       .get('/data/orderListByOrderId.json')
-      .then(res => setOrderList(res.data));
+      .then(res => setOrderList(res.data));  // 주문번호별 내역 보기 (현재코드)
   }, []);
 
   // useEffect(() => {
