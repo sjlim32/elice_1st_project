@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import multer from 'multer';
+import fs from 'fs';
 
 import connect from './schemas/index.js';
 import userRouter from './routes/user.js';
@@ -19,14 +21,12 @@ const corsConfig = {
   origin: 'http://localhost:3000/',
   credential: true,
 };
-app.use(cors(corsConfig));
+app.use(cors());
+
+app.use('/uploads', express.static('uploads'));
 
 //DB connet
 connect();
-
-//passport
-//app.use(passport.initialize());
-//passportConfig();
 
 //router
 app.use('/user', userRouter);
