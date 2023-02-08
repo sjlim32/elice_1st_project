@@ -23,6 +23,7 @@ export default function OrderList({ data }) {
       <OrderInfos>
         {data.map(el => (
           <div className="order" key={el.order_id}>
+            <p className="order-number">Order No. {el.order_id}</p>
             <Infos>
               <ul className="tabs">
                 <li>상품</li>
@@ -33,24 +34,28 @@ export default function OrderList({ data }) {
               </ul>
             </Infos>
             <Infos>
-              <ul className="tabs">
-                <li className="each-item">{el.products}</li>
-                <li className="each-item">
-                  {el.total_price
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                </li>
-                <li className="each-item">{el.date}</li>
-                <li className="each-item">{el.status}</li>
-                <li>
-                  <StyledButton
-                    disabled={el.status === '배송완료' ? true : false}
-                    width="70px"
-                    onClick={cancelOrderHandler}
-                  >
-                    주문 취소
-                  </StyledButton>
-                </li>
+              <ul className="item-tabs">
+                {el.items.map(el => (
+                  <div className="show-items" key={el.product}>
+                    <li className="each-item">{el.products}</li>
+                    <li className="each-item">
+                      {el.total_price
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </li>
+                    <li className="each-item">{el.date}</li>
+                    <li className="each-item">{el.status}</li>
+                    <li>
+                      <StyledButton
+                        disabled={el.status === '배송완료' ? true : false}
+                        width="70px"
+                        onClick={cancelOrderHandler}
+                      >
+                        주문 취소
+                      </StyledButton>
+                    </li>
+                  </div>
+                ))}
               </ul>
             </Infos>
           </div>
@@ -79,7 +84,7 @@ const OrderInfos = styled.div`
   > .order {
     margin-top: 20px;
     padding: 15px;
-    height: 180px;
+    /* height: 180px; */
     width: 60%;
     border-radius: 20px;
     background-color: #efefef;
@@ -87,6 +92,11 @@ const OrderInfos = styled.div`
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    > .order-number {
+      font-weight: 900;
+      font-size: 15px;
+      margin-bottom: 30px;
+    }
   }
 `;
 
@@ -96,10 +106,29 @@ const Infos = styled.div`
   font-size: 16px;
   text-align: center;
   font-weight: 600;
+  > .item-tabs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    > .show-items {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      > li {
+        height: 70px;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
   > .tabs {
     display: flex;
-    justifycontent: space-around;
+    justify-content: space-around;
     align-items: center;
+
     > li {
       width: 100%;
       text-align: center;

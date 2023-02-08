@@ -1,0 +1,60 @@
+[
+  {
+    "order_id": 1,
+    "items": [
+      {
+        "products": "가방1",
+        "total_price": 2000000,
+        "date": "2023/02/23",
+        "status": "배송완료"
+      },
+      {
+        "products": "가방2",
+        "total_price": 2000000,
+        "date": "2023/02/23",
+        "status": "배송완료"
+      },
+      {
+        "products": "가방3",
+        "total_price": 2000000,
+        "date": "2023/02/23",
+        "status": "배송완료"
+      },
+      {
+        "products": "가방4",
+        "total_price": 2000000,
+        "date": "2023/02/23",
+        "status": "배송완료"
+      }
+    ]
+  },
+  {
+    "order_id": 2,
+    "items": [
+      {
+        "products": "신발",
+        "total_price": 2000000,
+        "date": "2023/02/23",
+        "status": "배송완료"
+      },
+      {
+        "products": "가방121",
+        "total_price": 2000000,
+        "date": "2023/02/23",
+        "status": "배송완료"
+      },
+      {
+        "products": "액세서리3123",
+        "total_price": 2000000,
+        "date": "2023/02/23",
+        "status": "배송완료"
+      },
+      {
+        "products": "의류아무거나",
+        "total_price": 2000000,
+        "date": "2023/02/23",
+        "status": "배송완료"
+      }
+    ]
+  }
+]

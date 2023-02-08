@@ -16,7 +16,10 @@ export default function MyPage() {
 
   useEffect(() => {
     axios.get('/data/customerInfo.json').then(res => setCustomerInfo(res.data));
-    axios.get('/data/orderLists.json').then(res => setOrderList(res.data));
+    // axios.get('/data/orderLists.json').then(res => setOrderList(res.data));
+    axios
+      .get('/data/orderListByOrderId.json')
+      .then(res => setOrderList(res.data));
   }, []);
 
   // useEffect(() => {
