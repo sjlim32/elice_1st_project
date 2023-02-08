@@ -60,7 +60,7 @@ export default function UpdateInfoModal({ setIsToUpdate, orderId }) {
 
 const Modal = styled.div`
   position: absolute;
-  top: 450px;
+  top: 700px;
   right: 320px;
   width: 800px;
   height: 500px;
