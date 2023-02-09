@@ -47,7 +47,7 @@ export default function MyInfoList({ datas }) {
     btnState === '변경사항 저장하기' && alert('회원정보가 변경되었습니다.');
     axios
       .patch(`http://localhost:5001/user/${datas.id}`, inputValue)
-      .then(res => alert(res.data.message));
+      .then(res => alert(res.response.data.message));
   };
 
   // 회원정보 삭제
@@ -118,7 +118,7 @@ export default function MyInfoList({ datas }) {
                 type="text"
                 name="contact"
                 onChange={inputhandler}
-                placeholder={datas.phone}
+                placeholder={datas.contact}
               />
             </div>
           </div>

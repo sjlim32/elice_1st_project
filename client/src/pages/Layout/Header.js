@@ -98,11 +98,18 @@ function Icon() {
     window.location.href = '/user/signup';
   }
 
+  const navigate = useNavigate();
+
   return (
     <div>
       <ul>
         <li>
-          <ShoppingIconStyle fontSize="large">
+          <ShoppingIconStyle
+            fontSize="large"
+            onClick={() => {
+              navigate(`/cart`);
+            }}
+          >
             <AddShoppingCartIcon />
           </ShoppingIconStyle>
         </li>

@@ -116,6 +116,7 @@ function TotalPrice({ ordereditem }) {
 function OrderPage() {
   const [item, setItem] = useState([]);
   const [user, setUser] = useState({
+    id: '',
     name: '',
     email: '',
     address: '',
@@ -129,12 +130,16 @@ function OrderPage() {
     setItem(parsedData);
     console.log(item);
     if (localStorage.getItem('userToken')) {
-      const decoded = jwt_decode(localStorage.getItem('userToken'));
-      API.get(`/user/${decoded._id}`)
+      const decoded = JSON.parse(localStorage.getItem('userToken'));
+      console.log('decoded', decoded._id);
+      axios
+        .get(`http://localhost:5001/user/${decoded._id}`)
         .then(res => {
+          console.log(res);
           setUser(prev => {
             return {
               ...prev,
+              id: res.data.id,
               name: res.data.name,
               email: res.data.email,
               address: res.data.address,
@@ -156,18 +161,20 @@ function OrderPage() {
     try {
       let sum = 0;
       let total = 0;
-      await API.post(`/order`, {
-        user: user._id,
-        products: parsedCartData.map(i => i.name),
+      await axios.post(`http://localhost:5001/order`, {
+        user_id: user.id,
+        products: parsedCartData.map(i => i._id),
         address: user.address,
-        total_price: parsedCartData.map(i => {
-          sum += i.price;
-          total += sum;
-          return total;
-        }),
+        // total_price: parsedCartData.map(i => {
+        //   sum += i.price;
+        //   total += sum;
+        // return total;
+
+        // }),
+        total_price: 10000,
       });
     } catch (err) {
-      console.log(`${err.message}`);
+      console.log(`${err.response.data.message}`);
     }
   };
 
@@ -263,9 +270,6 @@ function OrderPage() {
             <TextWrap>
               <PersonalOrderInnerText>KRW</PersonalOrderInnerText>
             </TextWrap>
-            <div>
-              <TotalPrice ordereditem={item} />
-            </div>
             <div>
               <StyledButton onClick={handleSubmit} padding="10vh">
                 결제하기

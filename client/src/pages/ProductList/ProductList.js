@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ShowProduct from './ShowProduct';
 
 export default function ProductList() {
-  const [category, setCategory] = useState();
+  const [category, setCategory] = useState([]);
   const [ScrollY, setScrollY] = useState(0); // 스크롤값 저장
   const [BtnToTop, setBtnToTop] = useState(false);
   const [currentTab, setCurrentTab] = useState('의류');
@@ -24,7 +24,7 @@ export default function ProductList() {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5001/product/${reqData.gender}/${reqData.major_classification}/${reqData.minor_classification}`
+        `http://localhost:5001/product?gender=${reqData.gender}&major_classification=${reqData.major_classification}&minor_classification=${reqData.minor_classification}`
       )
       .then(res => {
         setCategory(res.data.products);
@@ -60,11 +60,11 @@ export default function ProductList() {
   return (
     <Container>
       <MainNav>
-        <span id="female" title="gender" onClick={reqDataHandlers}>
+        <span id="여성" title="gender" onClick={reqDataHandlers}>
           여성
         </span>
         <span>|</span>
-        <span id="male" title="gender" onClick={reqDataHandlers}>
+        <span id="남성" title="gender" onClick={reqDataHandlers}>
           남성
         </span>
       </MainNav>
@@ -114,7 +114,9 @@ export default function ProductList() {
         </ul>
       </SubMenuTab>
 
-      <div className="contents">{/* <ShowProduct datas={category} /> */}</div>
+      <div className="contents">
+        <ShowProduct datas={category} />
+      </div>
     </Container>
   );
 }

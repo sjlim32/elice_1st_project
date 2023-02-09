@@ -28,11 +28,7 @@ app.use('/uploads', express.static('uploads'));
 //DB connet
 connect();
 
-
 //router
-app.use('/', (req, res) => {
-  res.send('deployment')
-})
 app.use('/user', userRouter);
 app.use('/product', productRouter);
 app.use('/admin', admin, adminRouter);

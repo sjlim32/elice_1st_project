@@ -71,14 +71,15 @@ export default function SignupForm() {
         name: name,
         password: password,
         address: address,
-        phone: contact,
+        contact: contact,
       })
       .then(res => {
         alert(res.data.message);
+        console.log(res);
         navigate('/user/login');
       })
       .catch(error => {
-        alert(error.response.data.message);
+        console(error.response.data.message);
       });
   };
 

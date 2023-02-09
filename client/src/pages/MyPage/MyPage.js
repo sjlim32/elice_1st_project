@@ -14,22 +14,23 @@ export default function MyPage() {
   const { userid } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios.get('/data/customerInfo.json').then(res => setCustomerInfo(res.data));
-    // axios.get('/data/orderLists.json').then(res => setOrderList(res.data));  =>  전체주문내역으로 보기
-    axios
-      .get('/data/orderListByOrderId.json')
-      .then(res => setOrderList(res.data)); // 주문번호별 내역 보기 (현재코드)
-  }, []);
-
   // useEffect(() => {
+  //   axios.get('/data/customerInfo.json').then(res => setCustomerInfo(res.data));
+  //   // axios.get('/data/orderLists.json').then(res => setOrderList(res.data));  =>  전체주문내역으로 보기
   //   axios
-  //     .get('http://localhost:5001/user/:userId')
-  //     .then(res => setCustomerInfo(res.data));
-  //   axios
-  //     .get('http://localhost:5001/order/:userId')
-  //     .then(res => setOrderList(res.data));
+  //     .get('/data/orderListByOrderId.json')
+  //     .then(res => setOrderList(res.data)); // 주문번호별 내역 보기 (현재코드)
   // }, []);
+
+  useEffect(() => {
+    const userId = JSON.parse(localStorage.getItem('userToken'))._id;
+    axios
+      .get(`http://localhost:5001/user/${userId}`)
+      .then(res => setCustomerInfo(res.data));
+    axios
+      .get(`http://localhost:5001/order/${userId}`)
+      .then(res => setOrderList(res.data));
+  }, []);
 
   return (
     <Container>

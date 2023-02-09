@@ -48,7 +48,10 @@ function ProductItem({
         />
       </Item>
       <Item>
-        <ProductImage src={image} alt={name} />
+        <ProductImage
+          src={`http://localhost:5001/uploads/${id}.png`}
+          alt={name}
+        />
       </Item>
       <Item>{name}</Item>
       <Item>
