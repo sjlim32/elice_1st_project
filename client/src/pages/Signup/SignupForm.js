@@ -158,10 +158,10 @@ export default function SignupForm() {
           <input
             required
             id="contact"
-            type="number"
+            type="text"
             name="contact"
             onChange={inputhandler}
-            placeholder="000-0000-0000"
+            placeholder="휴대폰번호를 입력해주세요"
           />
         </div>
       </div>
