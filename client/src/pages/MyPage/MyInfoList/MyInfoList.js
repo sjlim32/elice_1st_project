@@ -8,13 +8,7 @@ export default function MyInfoList({ datas }) {
   const [btnState, setBtnState] = useState('정보수정하기');
   const [emailMsg, setEmailMsg] = useState('');
   const [pwMsg, setPwMsg] = useState('');
-  const [inputValue, setInputValue] = useState({
-    email: '',
-    password: '',
-    name: '',
-    contact: '',
-    address: '',
-  });
+  const [inputValue, setInputValue] = useState(datas);
 
   const pwValidation = e => {
     setBtnState('변경사항 저장하기');
@@ -69,7 +63,7 @@ export default function MyInfoList({ datas }) {
                 id="email"
                 type="email"
                 name="email"
-                placeholder={datas.email}
+                value={inputValue.email}
                 onChange={emailValidation}
                 onBlur={() => {
                   setEmailMsg('');
@@ -86,7 +80,7 @@ export default function MyInfoList({ datas }) {
                 id="password"
                 type="password"
                 name="password"
-                placeholder="******"
+                value={inputValue.password}
                 onChange={pwValidation}
                 onBlur={() => {
                   setPwMsg('');
@@ -104,8 +98,8 @@ export default function MyInfoList({ datas }) {
                 id="name"
                 type="text"
                 name="name"
+                value={inputValue.name}
                 onChange={inputhandler}
-                placeholder={datas.name}
               />
             </div>
           </div>
@@ -117,8 +111,8 @@ export default function MyInfoList({ datas }) {
                 id="contact"
                 type="text"
                 name="contact"
+                value={inputValue.contact}
                 onChange={inputhandler}
-                placeholder={datas.contact}
               />
             </div>
           </div>
@@ -130,8 +124,8 @@ export default function MyInfoList({ datas }) {
                 id="address"
                 type="text"
                 name="address"
+                value={inputValue.address}
                 onChange={inputhandler}
-                placeholder={datas.address}
               />
             </div>
           </div>
