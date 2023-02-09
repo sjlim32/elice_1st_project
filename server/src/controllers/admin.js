@@ -5,12 +5,11 @@ import Order from '../schemas/order.js';
 
 // * 상품 추가
 export const createProduct = async (req, res) => {
-    const { name, price, image, description, company, gender, major_classification, minor_classification } = req.body;
+    const { name, price, description, company, gender, major_classification, minor_classification } = req.body;
     try {
         const product = await Product.create({
             name,
             price,
-            image,
             description,
             company,
             gender,
