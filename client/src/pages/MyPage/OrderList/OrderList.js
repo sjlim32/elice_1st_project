@@ -23,40 +23,55 @@ export default function OrderList({ data }) {
       <OrderInfos>
         {data.map(el => (
           <div className="order" key={el.order_id}>
-            <p className="order-number">Order No. {el.order_id}</p>
-            <Infos>
-              <ul className="tabs">
-                <li>상품</li>
-                <li>총 가격</li>
-                <li>주문 날짜</li>
-                <li>배송 상태</li>
-                <li>주문 취소</li>
+            <OrderInfoById>
+              <ul className="total-ul-tab">
+                <li>
+                  <span className="bold">주문일자</span> <span>|</span>
+                  <span>{el.date}</span>
+                </li>
+                <li>
+                  <span className="bold">배송상태</span> <span>|</span>
+                  <span>{el.status}</span>
+                </li>
+                <li>
+                  <span className="bold">총가격</span> <span>|</span>
+                  <span>{el.total_price}</span>
+                </li>
               </ul>
-            </Infos>
+            </OrderInfoById>
+            <TitleTab>
+              <ul className="tabs">
+                <li className="p-image">상품</li>
+                <li className="p-count">상품 개수</li>
+                <li className="p-name">상품명</li>
+                <li className="p-price">가격</li>
+              </ul>
+            </TitleTab>
             <Infos>
               <ul className="item-tabs">
                 {el.items.map(el => (
                   <div className="show-items" key={el.product}>
-                    <li className="each-item">{el.products}</li>
-                    <li className="each-item">
-                      {el.total_price
+                    <li classname="p-image">
+                      <img src={el.image} alt={el.products} />
+                    </li>
+                    <li classname="p-count">{el.count}</li>
+                    <li className="p-name">{el.products}</li>
+                    <li className="p-price">
+                      {el.price
                         .toString()
                         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                      KRW
                     </li>
                     <li className="each-item">{el.date}</li>
                     <li className="each-item">{el.status}</li>
-                    <li>
-                      <StyledButton
-                        disabled={el.status === '배송완료' ? true : false}
-                        width="70px"
-                        onClick={cancelOrderHandler}
-                      >
-                        주문 취소
-                      </StyledButton>
-                    </li>
                   </div>
                 ))}
               </ul>
+              <li>
+                <StyledButton width="70px" onClick={cancelOrderHandler}>
+                  주문 취소
+                </StyledButton>
+              </li>
             </Infos>
           </div>
         ))}
@@ -76,6 +91,32 @@ export default function OrderList({ data }) {
 const Container = styled.div`
   width: 100%;
 `;
+
+const OrderInfoById = styled.div`
+  background-color: rgba(153, 164, 151, 1);
+  width: 100%;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  font-size: 18px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > .total-ul-tab {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    > li {
+      > span {
+        margin: 0px 2px;
+      }
+      > .bold {
+        font-weight: 700;
+      }
+    }
+  }
+`;
+
 const OrderInfos = styled.div`
   display: flex;
   flex-direction: column;
@@ -83,8 +124,6 @@ const OrderInfos = styled.div`
   position: relative;
   > .order {
     margin-top: 20px;
-    padding: 15px;
-    /* height: 180px; */
     width: 60%;
     border-radius: 20px;
     background-color: #efefef;
@@ -96,6 +135,29 @@ const OrderInfos = styled.div`
       font-weight: 900;
       font-size: 15px;
       margin-bottom: 30px;
+    }
+  }
+`;
+
+const TitleTab = styled.div`
+  width: 100%;
+  margin: 10px auto;
+  font-size: 16px;
+  text-align: center;
+  font-weight: 600;
+  > .tabs {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    > li {
+      width: 100%;
+      text-align: center;
+      border-right: 2px solid #373837;
+      color: #373837;
+      &:last-child {
+        border-right: none;
+      }
     }
   }
 `;
@@ -118,29 +180,32 @@ const Infos = styled.div`
       align-items: center;
       width: 100%;
       > li {
-        height: 70px;
+        height: 100px;
+        margin: 10px;
         width: 100%;
         text-align: center;
+        img {
+          height: 80px;
+        }
       }
     }
   }
-  > .tabs {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
 
-    > li {
-      width: 100%;
-      text-align: center;
-      border-right: 2px solid #373837;
-      color: #373837;
-      &:last-child {
-        border-right: none;
-      }
+  > li {
+    width: 100%;
+    text-align: center;
+    border-right: 2px solid #373837;
+    color: #373837;
+    &:last-child {
+      border-right: none;
     }
-    > .each-item {
-      border: none;
-      font-weight: 600;
+  }
+  > .each-item {
+    border: none;
+    font-weight: 600;
+    > img {
+      height: 50px;
+      width: 50px;
     }
   }
 
