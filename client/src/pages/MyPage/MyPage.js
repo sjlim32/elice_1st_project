@@ -23,7 +23,7 @@ export default function MyPage() {
   // }, []);
 
   useEffect(() => {
-    const userId = JSON.parse(localStorage.getItem('userToken'))._id;
+    const userId = JSON.parse(localStorage.getItem('userData'))._id;
     API.get(`/api/user/${userId}`).then(res => setCustomerInfo(res.data));
     API.get(`/api/order/${userId}`).then(res => setOrderList(res.data));
   }, []);
