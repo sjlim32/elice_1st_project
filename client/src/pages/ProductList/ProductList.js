@@ -18,7 +18,18 @@ export default function ProductList() {
 
   // reqDataHandlers
   const reqDataHandlers = e => {
-    setReqData({ ...reqData, [e.target.title]: e.target.id });
+    if (e.target.title === 'major_classification') {
+      setReqData({
+        ...reqData,
+        minor_classification: '',
+        [e.target.title]: e.target.id,
+      });
+    } else {
+      setReqData({
+        ...reqData,
+        [e.target.title]: e.target.id,
+      });
+    }
   };
 
   useEffect(() => {
