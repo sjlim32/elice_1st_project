@@ -58,7 +58,7 @@ export default function MyPage() {
           {orderList.length === 0 ? (
             '최근 주문내역이 없습니다.'
           ) : (
-            <OrderList data={orderList || []} />
+            <OrderList data={orderList} />
           )}
         </ShowList>
       )}
