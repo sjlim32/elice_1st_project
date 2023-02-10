@@ -84,7 +84,7 @@ function Icon() {
   const navigate = useNavigate();
 
   function moveHandler() {
-    if (localStorage.getItem('userToken')) {
+    if (localStorage.getItem('userData')) {
       navigate('/user/:userid');
     }
     navigate('/user/signup');

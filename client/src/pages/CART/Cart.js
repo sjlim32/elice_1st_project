@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 function ProductItem({
@@ -11,13 +11,11 @@ function ProductItem({
   setCheckItems,
   checkItems,
 }) {
-  const [productCount, setProductCount] = useState(1);
   const handleDelete = () => {
     setProductList(prev => prev.filter(product => product._id !== id));
   };
 
   const handleCount = e => {
-    setProductCount(e.target.value);
     setProductList(prev =>
       prev.map(product => {
         if (product._id === id) {
@@ -56,12 +54,7 @@ function ProductItem({
       </Item>
       <Item>{name}</Item>
       <Item>
-        <Count
-          type="number"
-          value={productCount}
-          onChange={handleCount}
-          min={0}
-        />
+        <Count type="number" value={count} onChange={handleCount} min={1} />
       </Item>
       <Item>FREE</Item>
       <Item>{price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</Item>
