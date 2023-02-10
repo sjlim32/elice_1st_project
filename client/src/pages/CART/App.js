@@ -80,7 +80,7 @@ function Cart() {
               id={_id}
               price={price}
               image={image}
-              size={size}
+              // size={size}
               count={count}
               setProductList={setProductList}
               setCheckItems={setCheckItems}
