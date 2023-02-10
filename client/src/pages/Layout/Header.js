@@ -34,7 +34,7 @@ const GenderStyle = styled.div`
   margin: 10px 0px 0 0px;
   display: inline-block;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 400;
 `;
 
 const HrStyle = styled.hr`
@@ -63,7 +63,15 @@ function Nav() {
       <ul>
         <GenderStyle>
           <li style={{ marginLeft: '50px' }}>
-            <a href="/product">전체상품</a>
+            <a href="/product">여성</a>
+          </li>
+        </GenderStyle>
+        <GenderStyle>
+          <div style={{ fontSize: '30px', fontWeight: 'lighter' }}>|</div>
+        </GenderStyle>
+        <GenderStyle>
+          <li>
+            <a href="/product">남성</a>
           </li>
         </GenderStyle>
       </ul>
@@ -73,24 +81,14 @@ function Nav() {
 }
 
 function Icon() {
-  // const [isLogin, setisLogin] = useState(false);
-  // const navigate = useNavigate();
-  // //로그인 여부에 따른 라우팅
-  // useEffect(() => {
-  //   try {
-  //     localStorage.getItem('userToken');
-  //     setisLogin(true);
-  //     navigate('/user/mypage');
-  //   } catch (err) {
-  //     navigate('/user/signup');
-  //   }
-  // }, []);
+  const navigate = useNavigate();
 
   function moveHandler() {
-    window.location.href = '/user/signup';
+    if (localStorage.getItem('userToken')) {
+      navigate('/user/:userid');
+    }
+    navigate('/user/signup');
   }
-
-  const navigate = useNavigate();
 
   return (
     <div>
