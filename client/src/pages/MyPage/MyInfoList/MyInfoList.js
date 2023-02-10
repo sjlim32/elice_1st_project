@@ -17,7 +17,7 @@ export default function MyInfoList({ datas }) {
     setBtnState('변경사항 저장하기');
     let pw = e.target.value;
     setInputValue({ ...inputValue, password: pw });
-    pw.length > 5 ? setPwMsg('') : setPwMsg('비밀번호를 6자이상 입력해주세요.');
+    pw.length > 5 ? setPwMsg('') : setPwMsg('비밀번호를 7자이상 입력해주세요.');
   };
 
   const emailValidation = e => {
