@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import banner from '../../images/banner.png';
@@ -9,6 +9,8 @@ import ProductDetailFooter from './ProductDetailFooter';
 export default function ProductDetail() {
   const { productId } = useParams();
   const [info, setInfo] = useState();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`http://localhost:5001/product/${productId}`).then(res => {
@@ -24,7 +26,12 @@ export default function ProductDetail() {
 
   const addItemToCart = () => {
     localStorage.setItem('cart', JSON.stringify([info]));
-    alert('장바구니에 추가되었습니다.');
+    let result = window.confirm('장바구니로 이동하시겠습니까?');
+    if (result) {
+      navigate('/cart');
+    } else {
+      console.log('취소 되었습니다.');
+    }
   };
 
   return (
