@@ -7,7 +7,7 @@ function OrderList({ ordereditem }) {
       {ordereditem.map(i => (
         <div key={i}>
           <ItemWrap>
-                <ItemImg alt={item.name} src={`http://localhost:5001/uploads/${item._id}.png`} />
+                <ItemImg alt={i.name} src={`http://localhost:5001/uploads/${i._id}.png`} />
           </ItemWrap>
           <OrderedItemText>
             <OrderedItemName><OrderedItemInfo>상품명</OrderedItemInfo><OrderedItemInfo>{i.name}</OrderedItemInfo></OrderedItemName>
