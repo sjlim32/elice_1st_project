@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import UpdateInfoModal from './UpdateInfoModal';
 
 export default function OrderList({ data }) {
-  const [orderData, setOrderData] = useState();
   const [isToUpdate, setIsToUpdate] = useState(false);
+  console.log(data);
 
   const updateOrderHandler = () => {
     setIsToUpdate(true);
@@ -20,58 +20,57 @@ export default function OrderList({ data }) {
     <Container>
       <NewButton onClick={updateOrderHandler}>배송지 정보 수정하기</NewButton>
       <OrderInfos>
-        {data &&
-          data.map(el => (
-            <div className="order" key={el.order_id}>
-              <OrderInfoById>
-                <ul className="total-ul-tab">
-                  <li>
-                    <span className="bold">주문일자</span> <span>|</span>
-                    <span>{el.date}</span>
-                  </li>
-                  <li>
-                    <span className="bold">배송상태</span> <span>|</span>
-                    <span>{el.status}</span>
-                  </li>
-                  <li>
-                    <span className="bold">총가격</span> <span>|</span>
-                    <span>{el.total_price}</span>
-                  </li>
-                </ul>
-              </OrderInfoById>
-              <TitleTab>
-                <ul className="tabs">
-                  <li className="p-image">상품</li>
-                  <li className="p-count">상품 개수</li>
-                  <li className="p-name">상품명</li>
-                  <li className="p-price">가격</li>
-                </ul>
-              </TitleTab>
-              <Infos>
-                <ul className="item-tabs">
-                  {el.items.map(el => (
-                    <div className="show-items" key={el.product}>
-                      <li className="image-info">
-                        <img src={el.image} alt={el.products} />
-                      </li>
-                      <li>{el.count}</li>
-                      <li>{el.products}</li>
-                      <li>
-                        {el.price
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                        KRW
-                      </li>
-                    </div>
-                  ))}
-                </ul>
+        {data.map(el => (
+          <div className="order" key={el.order_id}>
+            <OrderInfoById>
+              <ul className="total-ul-tab">
+                <li>
+                  <span className="bold">주문일자</span> <span>|</span>
+                  <span>{el.createdAt}</span>
+                </li>
+                <li>
+                  <span className="bold">배송상태</span> <span>|</span>
+                  <span>{el.status}</span>
+                </li>
+                <li>
+                  <span className="bold">총가격</span> <span>|</span>
+                  <span>{el.total_price}</span>
+                </li>
+              </ul>
+            </OrderInfoById>
+            <TitleTab>
+              <ul className="tabs">
+                <li className="p-image">상품</li>
+                <li className="p-count">상품 개수</li>
+                <li className="p-name">상품명</li>
+                <li className="p-price">가격</li>
+              </ul>
+            </TitleTab>
+            <Infos>
+              <ul className="item-tabs">
+                {el.products.map(el => (
+                  <div className="show-items" key={el.product}>
+                    <li className="image-info">
+                      <img src={el.image} alt={el.products} />
+                    </li>
+                    <li>{el.count}</li>
+                    <li>{el.products}</li>
+                    <li>
+                      {el.price
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                      KRW
+                    </li>
+                  </div>
+                ))}
+              </ul>
 
-                <StyledButton width="70px" onClick={cancelOrderHandler}>
-                  주문 취소
-                </StyledButton>
-              </Infos>
-            </div>
-          ))}
+              <StyledButton width="70px" onClick={cancelOrderHandler}>
+                주문 취소
+              </StyledButton>
+            </Infos>
+          </div>
+        ))}
       </OrderInfos>
       {isToUpdate ? (
         <UpdateInfoModal

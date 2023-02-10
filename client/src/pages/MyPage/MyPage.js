@@ -8,9 +8,9 @@ import MyInfoList from './MyInfoList/MyInfoList';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function MyPage() {
-  const [customerInfo, setCustomerInfo] = useState('');
+  const [customerInfo, setCustomerInfo] = useState([]);
   const [currentTab, setCurrentTab] = useState('');
-  const [orderList, setOrderList] = useState('');
+  const [orderList, setOrderList] = useState([]);
   const { userid } = useParams();
   const navigate = useNavigate();
 
