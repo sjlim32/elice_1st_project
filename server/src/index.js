@@ -23,17 +23,17 @@ const corsConfig = {
 };
 app.use(cors());
 
-app.use('/uploads', express.static('uploads'));
+app.use('/api/uploads', express.static('uploads'));
 
 //DB connet
 connect();
 
 //router
-app.use('/user', userRouter);
-app.use('/product', productRouter);
-app.use('/admin', admin, adminRouter);
-app.use('/category', categoryRouter);
-app.use('/order', orderRouter);
+app.use('/api/user', userRouter);
+app.use('/api/product', productRouter);
+app.use('/api/admin', admin, adminRouter);
+app.use('/api/category', categoryRouter);
+app.use('/api/order', orderRouter);
 
 const PORT = process.env.PORT || 5001;
 
