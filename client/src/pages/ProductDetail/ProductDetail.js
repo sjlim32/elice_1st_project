@@ -14,7 +14,7 @@ export default function ProductDetail() {
 
   useEffect(() => {
     API.get(`/api/product/${productId}`).then(res => {
-      setInfo(res.data);
+      setInfo({ ...res.data, count: 1 });
     });
   }, []);
 
