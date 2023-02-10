@@ -25,8 +25,8 @@ function OrderPage() {
     const parsedData = JSON.parse(dataFromLocalStorage);
     setItem(parsedData);
     console.log(item);
-    if (localStorage.getItem('userToken')) {
-      const decoded = JSON.parse(localStorage.getItem('userToken'));
+    if (localStorage.getItem('userData')) {
+      const decoded = JSON.parse(localStorage.getItem('userData'));
       console.log('decoded', decoded._id);
       API.get(`/api/user/${decoded._id}`)
         .then(res => {

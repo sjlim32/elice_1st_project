@@ -74,8 +74,9 @@ function LoginPage() {
       });
       const user = res.data;
       const jwtToken = user.token;
+      localStorage.setItem('token', jwtToken);
       const decodedJwt = jwt_decode(jwtToken);
-      localStorage.setItem('userToken', JSON.stringify(decodedJwt));
+      localStorage.setItem('userData', JSON.stringify(decodedJwt));
       navigate('/');
     } catch (err) {
       alert(err.response.data.message);
