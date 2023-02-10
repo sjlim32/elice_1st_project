@@ -68,7 +68,7 @@ function LoginPage() {
     e.preventDefault();
 
     try {
-      const res = await API.post('/user/login', {
+      const res = await API.post('/api/user/login', {
         email,
         password,
       });

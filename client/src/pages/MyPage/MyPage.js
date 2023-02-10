@@ -24,12 +24,8 @@ export default function MyPage() {
 
   useEffect(() => {
     const userId = JSON.parse(localStorage.getItem('userToken'))._id;
-    API.get(`http://kdt-ai6-team01.elicecoding.com/api/user/${userId}`).then(
-      res => setCustomerInfo(res.data)
-    );
-    API.get(`http://kdt-ai6-team01.elicecoding.com/api/order/${userId}`).then(
-      res => setOrderList(res.data)
-    );
+    API.get(`/api/user/${userId}`).then(res => setCustomerInfo(res.data));
+    API.get(`/api/order/${userId}`).then(res => setOrderList(res.data));
   }, []);
 
   return (

@@ -34,7 +34,7 @@ export default function ProductList() {
 
   useEffect(() => {
     API.get(
-      `/product?gender=${reqData.gender}&major_classification=${reqData.major_classification}&minor_classification=${reqData.minor_classification}`
+      `/api/product?gender=${reqData.gender}&major_classification=${reqData.major_classification}&minor_classification=${reqData.minor_classification}`
     ).then(res => {
       setCategory(res.data.products);
     });

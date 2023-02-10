@@ -42,14 +42,14 @@ export default function MyInfoList({ datas }) {
   const handleUpdateInfo = e => {
     e.preventDefault();
     btnState === '변경사항 저장하기' && alert('회원정보가 변경되었습니다.');
-    API.patch(`/user/${datas.id}`, inputValue).then(res =>
+    API.patch(`/api/user/${datas.id}`, inputValue).then(res =>
       alert(res.response.data.message)
     );
   };
 
   // 회원정보 삭제
   const handleDeleteInfo = () => {
-    API.delete(`/user/${datas.id}`).then(res => alert(res.data.message));
+    API.delete(`/api/user/${datas.id}`).then(res => alert(res.data.message));
   };
 
   // 로그아웃
