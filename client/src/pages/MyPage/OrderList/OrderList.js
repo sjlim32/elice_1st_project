@@ -2,6 +2,7 @@ import { useState } from 'react';
 import API from '../../../API';
 import styled from 'styled-components';
 import UpdateInfoModal from './UpdateInfoModal';
+import moment from 'moment';
 
 export default function OrderList({ data }) {
   const [isToUpdate, setIsToUpdate] = useState(false);
@@ -26,7 +27,7 @@ export default function OrderList({ data }) {
               <ul className="total-ul-tab">
                 <li>
                   <span className="bold">주문일자</span> <span>|</span>
-                  <span>{el.createdAt}</span>
+                  <span>{moment(el.createdAt).format('YYYY-MM-DD')}</span>
                 </li>
                 <li>
                   <span className="bold">배송상태</span> <span>|</span>
@@ -51,7 +52,10 @@ export default function OrderList({ data }) {
                 {el.products.map(el => (
                   <div className="show-items" key={el.product}>
                     <li className="image-info">
-                      <img src={el.image} alt={el.products} />
+                      <img
+                        src={`http://kdt-ai6-team01.elicecoding.com/api/uploads/${el._id}.png`}
+                        alt={el.products}
+                      />
                     </li>
                     <li>{el.count}</li>
                     <li>{el.name}</li>
