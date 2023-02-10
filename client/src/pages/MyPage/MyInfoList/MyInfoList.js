@@ -1,10 +1,13 @@
-//회원정보 조회 & 수정 & 탈퇴
+//회원정보 조회 & 수정 & 탈퇴 & 로그아웃
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 
 export default function MyInfoList({ datas }) {
+  const navigate = useNavigate();
+
   const [btnState, setBtnState] = useState('정보수정하기');
   const [emailMsg, setEmailMsg] = useState('');
   const [pwMsg, setPwMsg] = useState('');
@@ -49,6 +52,12 @@ export default function MyInfoList({ datas }) {
     axios
       .delete(`http://localhost:5001/user/${datas.id}`)
       .then(res => alert(res.data.message));
+  };
+
+  // 로그아웃
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/');
   };
 
   return (
@@ -131,6 +140,9 @@ export default function MyInfoList({ datas }) {
           </div>
           <StyledButton>{btnState}</StyledButton>
         </form>
+        <button className="logout-btn" onClick={handleLogout}>
+          로그아웃
+        </button>
         <button className="delete-info-btn" onClick={handleDeleteInfo}>
           회원 탈퇴
         </button>
@@ -180,6 +192,24 @@ const MyInfos = styled.div`
     color: red;
     font-size: 10.5px;
     padding-top: 5px;
+  }
+
+  > .logout-btn {
+    background-color: rgba(153, 164, 151, 1);
+    color: white;
+    font-size: 13px;
+    font-weight: 400;
+    width: 10%;
+    border: none;
+    border-radius: 15px;
+    padding-block: 10px;
+    text-align: center;
+    transition: 0.25s;
+    &:hover {
+      cursor: pointer;
+      background-color: gray;
+      color: white;
+    }
   }
 
   > form {
