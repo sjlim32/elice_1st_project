@@ -28,7 +28,7 @@ export const getOrderDetails = async (req, res) => {
   const userId = req.params.user_id;
 
   try {
-    const user = await User.find(userId)
+    const user = await User.find({ _id: userId })
       .populate({ path: 'order', select: ['products', 'total_price', 'status'] })
       .populate({ path: 'products', select: ['name', 'price'] });
     res.status(200).json(user);
