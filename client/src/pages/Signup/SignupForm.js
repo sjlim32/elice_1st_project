@@ -77,7 +77,7 @@ export default function SignupForm() {
         navigate('/user/login');
       })
       .catch(error => {
-        console(error.response.data.message);
+        console.log(error.response.data.message);
       });
   };
 
