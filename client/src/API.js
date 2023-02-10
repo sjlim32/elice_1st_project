@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURl: 'http://kdt-ai6-team01.elicecoding.com/',
+  baseURL: 'http://kdt-ai6-team01.elicecoding.com/',
 });
 
 API.interceptors.request.use(req => {
