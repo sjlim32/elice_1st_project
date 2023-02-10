@@ -25,7 +25,8 @@ export default function ProductDetail() {
   // }, []);
 
   const addItemToCart = () => {
-    localStorage.setItem('cart', JSON.stringify([info]));
+    let cartItems = JSON.parse(localStorage.getItem('cart'));
+    localStorage.setItem('cart', JSON.stringify([...cartItems, info]));
     let result = window.confirm('장바구니로 이동하시겠습니까?');
     if (result) {
       navigate('/cart');
