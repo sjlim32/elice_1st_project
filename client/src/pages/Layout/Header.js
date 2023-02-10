@@ -31,10 +31,10 @@ const PersonIconStyle = styled(PersonIcon)`
 
 const GenderStyle = styled.div`
   padding: 10px;
-  margin: 10px 0px 0 0px;
+  margin: 2.5vh 0px 0 7vh;
   display: inline-block;
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 500;
 `;
 
 const HrStyle = styled.hr`
@@ -62,17 +62,7 @@ function Nav() {
       <br />
       <ul>
         <GenderStyle>
-          <li style={{ marginLeft: '50px' }}>
-            <a href="/product">여성</a>
-          </li>
-        </GenderStyle>
-        <GenderStyle>
-          <div style={{ fontSize: '30px', fontWeight: 'lighter' }}>|</div>
-        </GenderStyle>
-        <GenderStyle>
-          <li>
-            <a href="/product">남성</a>
-          </li>
+            <a href="/product">쇼핑하러 가기 →</a>
         </GenderStyle>
       </ul>
       <HrStyle />
@@ -84,7 +74,7 @@ function Icon() {
   const navigate = useNavigate();
 
   function moveHandler() {
-    if (localStorage.getItem('userData')) {
+    if (localStorage.getItem('userToken')) {
       navigate('/user/:userid');
     }
     navigate('/user/signup');

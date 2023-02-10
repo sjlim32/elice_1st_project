@@ -53,6 +53,7 @@ function OrderPage() {
     const cartData = localStorage.getItem('cart');
     const parsedCartData = JSON.parse(cartData);
 
+    if (localStorage.getItem('userData')) {
     try {
       await API.post(`/api/order`, {
         user_id: user.id,
@@ -64,6 +65,7 @@ function OrderPage() {
     } catch (err) {
       console.log(`${err.response.data.message}`);
       alert('상품 주문에 실패하였습니다. 다시 시도해 주세요.');
+    }
     }
   };
 

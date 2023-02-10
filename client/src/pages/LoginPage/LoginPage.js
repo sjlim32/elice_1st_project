@@ -74,9 +74,12 @@ function LoginPage() {
       });
       const user = res.data;
       const jwtToken = user.token;
-      localStorage.setItem('token', jwtToken);
+      localStorage.setItem('userToken', jwtToken);
       const decodedJwt = jwt_decode(jwtToken);
       localStorage.setItem('userData', JSON.stringify(decodedJwt));
+      if (!localStorage.getItem('userData')){
+        navigate('/signup')
+      }
       navigate('/');
     } catch (err) {
       alert(err.response.data.message);
