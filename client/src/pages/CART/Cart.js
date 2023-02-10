@@ -11,7 +11,7 @@ function ProductItem({
   setCheckItems,
   checkItems,
 }) {
-  const [productCount, setProductCount] = useState('1');
+  const [productCount, setProductCount] = useState(1);
   const handleDelete = () => {
     setProductList(prev => prev.filter(product => product._id !== id));
   };

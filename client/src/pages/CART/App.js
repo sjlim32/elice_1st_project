@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Line from '../../components/line';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 import ProductItem from './Cart';
 
 function Cart() {
+  const navigate = useNavigate();
   const [productList, setProductList] = useState(
     JSON.parse(localStorage.getItem('cart')) || []
   );
@@ -27,15 +28,25 @@ function Cart() {
     setProductList([]);
   };
 
+  /** 주문하기 버튼
+   *  purchase라는 키값으로 체크한 상품 데이터 local storage에 저장
+   *  주문한 상품은 장바구니에서 제거
+   *  order 페이지로 redirect
+   */
   const handleOrder = () => {
-    axios.post(
-      'http://localhost:5001/order',
-      productList.filter(product => checkItems.includes(product._id))
+    localStorage.setItem(
+      'purchase',
+      JSON.stringify(
+        productList.filter(product => checkItems.includes(product._id))
+      )
     );
-    // console.log(
-    //   '주문내역',
-    //   productList.filter(product => checkItems.includes(product._id))
-    // );
+    localStorage.setItem(
+      'cart',
+      JSON.stringify(
+        productList.filter(product => !checkItems.includes(product._id))
+      )
+    );
+    navigate('/order');
   };
 
   useEffect(() => {
