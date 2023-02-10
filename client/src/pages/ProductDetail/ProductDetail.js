@@ -13,7 +13,7 @@ export default function ProductDetail() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    API.get(`/product/${productId}`).then(res => {
+    API.get(`/api/product/${productId}`).then(res => {
       setInfo(res.data);
     });
   }, []);

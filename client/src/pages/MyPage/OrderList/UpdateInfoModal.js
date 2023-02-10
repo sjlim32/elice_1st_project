@@ -20,7 +20,7 @@ export default function UpdateInfoModal({ setIsToUpdate, orderId }) {
 
   const submitHandler = () => {
     alert('수정이 완료되었습니다');
-    API.patch(`/order/${orderId}`, inputValue);
+    API.patch(`/api/order/${orderId}`, inputValue);
     setIsToUpdate(false);
   };
   return (

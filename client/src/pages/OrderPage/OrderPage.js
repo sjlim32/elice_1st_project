@@ -28,7 +28,7 @@ function OrderPage() {
     if (localStorage.getItem('userToken')) {
       const decoded = JSON.parse(localStorage.getItem('userToken'));
       console.log('decoded', decoded._id);
-      API.get(`/user/${decoded._id}`)
+      API.get(`/api/user/${decoded._id}`)
         .then(res => {
           console.log(res);
           setUser(prev => {
@@ -54,7 +54,7 @@ function OrderPage() {
     const parsedCartData = JSON.parse(cartData);
 
     try {
-      await API.post(`/order`, {
+      await API.post(`/api/order`, {
         user_id: user.id,
         products: parsedCartData.map(i => i._id),
         address: user.address,

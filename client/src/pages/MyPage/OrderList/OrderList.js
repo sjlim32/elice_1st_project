@@ -12,7 +12,7 @@ export default function OrderList({ data }) {
   };
 
   const cancelOrderHandler = () => {
-    API.delete(`/order/${data.order_id}`) // path에 orderid추가하기
+    API.delete(`/api/order/${data.order_id}`) // path에 orderid추가하기
       .then(() => alert('주문이 취소되었습니다.'));
   };
 
