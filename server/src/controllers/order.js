@@ -30,7 +30,7 @@ export const getOrderDetails = async (req, res) => {
   try {
     const user = await User.find({ _id: userId })
       .populate({ path: 'order', select: ['products', 'total_price', 'status'] })
-      .populate({ path: 'products', select: ['name', 'price'] });
+      .populate({ path: 'product', select: ['name', 'price'] });
     res.status(200).json(user);
   } catch (error) {
     console.log(error);
