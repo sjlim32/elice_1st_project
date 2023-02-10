@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import API from '../../API';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -13,7 +13,7 @@ export default function ProductDetail() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:5001/product/${productId}`).then(res => {
+    API.get(`/product/${productId}`).then(res => {
       setInfo(res.data);
     });
   }, []);
@@ -39,7 +39,10 @@ export default function ProductDetail() {
       <ProductSummary>
         <div className="product-img">
           <img
-            src={info && `http://localhost:5001/uploads/${info._id}.png`}
+            src={
+              info &&
+              `http://kdt-ai6-team01.elicecoding.com/api/uploads/${info._id}.png`
+            }
             alt="product-Img"
           />
         </div>

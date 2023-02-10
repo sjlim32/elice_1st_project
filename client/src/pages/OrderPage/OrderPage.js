@@ -4,7 +4,6 @@ import Line from '../../components/line';
 import StyledButton from '../../components/StyledButton';
 import OrderList from './OrderList';
 import API from '../../API';
-import axios from 'axios';
 
 function OrderPage() {
   const [item, setItem] = useState([]);
@@ -17,9 +16,9 @@ function OrderPage() {
   });
 
   let totalprice = 0;
-  item.forEach((i)=>{
+  item.forEach(i => {
     totalprice += i.price * i.count;
-  })
+  });
 
   useEffect(() => {
     const dataFromLocalStorage = localStorage.getItem('purchase');
@@ -29,8 +28,7 @@ function OrderPage() {
     if (localStorage.getItem('userToken')) {
       const decoded = JSON.parse(localStorage.getItem('userToken'));
       console.log('decoded', decoded._id);
-      axios
-        .get(`http://localhost:5001/user/${decoded._id}`)
+      API.get(`/user/${decoded._id}`)
         .then(res => {
           console.log(res);
           setUser(prev => {
@@ -56,7 +54,7 @@ function OrderPage() {
     const parsedCartData = JSON.parse(cartData);
 
     try {
-      await axios.post(`http://localhost:5001/order`, {
+      await API.post(`/order`, {
         user_id: user.id,
         products: parsedCartData.map(i => i._id),
         address: user.address,
@@ -72,12 +70,9 @@ function OrderPage() {
   const pay = ['가상계좌', '신용/체크카드', '토스페이', '네이버페이'];
   const userOrderInfo = ['이름', '연락처', '주소', '이메일'];
 
-
   return (
     <Wrap>
-      <OrderHeading>
-        주문/결제
-      </OrderHeading>
+      <OrderHeading>주문/결제</OrderHeading>
       <InlineWrap>
         <CardWrap width="50%">
           <OrderCard height="40vh">
@@ -232,6 +227,5 @@ const PicWrap = styled.div`
 const PayButton = styled(StyledButton)`
   margin: 13vh 0 0 50vh;
 `;
-
 
 export default OrderPage;

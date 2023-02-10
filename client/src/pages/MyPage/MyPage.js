@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../API';
 import styled from 'styled-components';
 import Line from '../../components/line';
 import OrderList from './OrderList/OrderList';
@@ -24,12 +24,12 @@ export default function MyPage() {
 
   useEffect(() => {
     const userId = JSON.parse(localStorage.getItem('userToken'))._id;
-    axios
-      .get(`http://localhost:5001/user/${userId}`)
-      .then(res => setCustomerInfo(res.data));
-    axios
-      .get(`http://localhost:5001/order/${userId}`)
-      .then(res => setOrderList(res.data));
+    API.get(`http://kdt-ai6-team01.elicecoding.com/api/user/${userId}`).then(
+      res => setCustomerInfo(res.data)
+    );
+    API.get(`http://kdt-ai6-team01.elicecoding.com/api/order/${userId}`).then(
+      res => setOrderList(res.data)
+    );
   }, []);
 
   return (
