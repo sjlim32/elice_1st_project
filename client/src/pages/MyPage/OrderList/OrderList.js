@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import API from '../../../API';
 import styled from 'styled-components';
 import UpdateInfoModal from './UpdateInfoModal';
 
@@ -12,8 +12,7 @@ export default function OrderList({ data }) {
   };
 
   const cancelOrderHandler = () => {
-    axios
-      .delete(`http://localhost:5001/order/${data.order_id}`) // path에 orderid추가하기
+    API.delete(`/order/${data.order_id}`) // path에 orderid추가하기
       .then(() => alert('주문이 취소되었습니다.'));
   };
 

@@ -50,7 +50,7 @@ function ProductItem({
       </Item>
       <Item>
         <ProductImage
-          src={`http://localhost:5001/uploads/${id}.png`}
+          src={`http://kdt-ai6-team01.elicecoding.com/api/uploads/${id}.png`}
           alt={name}
         />
       </Item>

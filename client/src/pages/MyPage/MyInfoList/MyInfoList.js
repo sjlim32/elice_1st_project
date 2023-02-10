@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../../API';
 import styled from 'styled-components';
 
 export default function MyInfoList({ datas }) {
@@ -42,16 +42,14 @@ export default function MyInfoList({ datas }) {
   const handleUpdateInfo = e => {
     e.preventDefault();
     btnState === '변경사항 저장하기' && alert('회원정보가 변경되었습니다.');
-    axios
-      .patch(`http://localhost:5001/user/${datas.id}`, inputValue)
-      .then(res => alert(res.response.data.message));
+    API.patch(`/user/${datas.id}`, inputValue).then(res =>
+      alert(res.response.data.message)
+    );
   };
 
   // 회원정보 삭제
   const handleDeleteInfo = () => {
-    axios
-      .delete(`http://localhost:5001/user/${datas.id}`)
-      .then(res => alert(res.data.message));
+    API.delete(`/user/${datas.id}`).then(res => alert(res.data.message));
   };
 
   // 로그아웃

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import axios from 'axios';
+import API from '../../API';
 import StyledButton from '../../components/StyledButton';
 import jwt_decode from 'jwt-decode';
 
@@ -68,7 +68,7 @@ function LoginPage() {
     e.preventDefault();
 
     try {
-      const res = await axios.post('http://localhost:5001/user/login', {
+      const res = await API.post('/user/login', {
         email,
         password,
       });

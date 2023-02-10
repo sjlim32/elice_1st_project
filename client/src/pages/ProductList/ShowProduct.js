@@ -14,7 +14,7 @@ export default function ShowProduct({ datas }) {
         >
           <img
             className="product-image"
-            src={`http://localhost:5001/uploads/${el._id}.png`}
+            src={`http://kdt-ai6-team01.elicecoding.com/api/uploads/${el._id}.png`}
             alt="product-Img"
           />
           <p className="product-brand">{el.brand}</p>
