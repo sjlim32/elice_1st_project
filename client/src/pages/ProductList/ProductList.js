@@ -60,11 +60,21 @@ export default function ProductList() {
   return (
     <Container>
       <MainNav>
-        <span id="여성" title="gender" onClick={reqDataHandlers}>
+        <span
+          className="gender"
+          id="여성"
+          title="gender"
+          onClick={reqDataHandlers}
+        >
           여성
         </span>
         <span>|</span>
-        <span id="남성" title="gender" onClick={reqDataHandlers}>
+        <span
+          className="gender"
+          id="남성"
+          title="gender"
+          onClick={reqDataHandlers}
+        >
           남성
         </span>
       </MainNav>
@@ -122,7 +132,7 @@ export default function ProductList() {
 }
 
 const Container = styled.div`
-  margin-top: 90px;
+  margin-top: 20px;
   width: 100%;
   padding: 40px;
   > .topBtn {
@@ -216,13 +226,19 @@ const SubMenuTab = styled.div`
 `;
 
 const MainNav = styled.div`
-  width: 100%;
-  border-bottom: 10px solid rgba(153, 164, 151, 1);
+  width: 13%;
+  color: black;
+  margin: 10px auto;
   padding-bottom: 20px;
-  font-weight: 600;
-  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 23px;
   > span {
     padding: 5px;
+  }
+  > .gender {
+    cursor: pointer;
   }
 `;
 
