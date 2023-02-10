@@ -54,7 +54,7 @@ export default function OrderList({ data }) {
                       <img src={el.image} alt={el.products} />
                     </li>
                     <li>{el.count}</li>
-                    <li>{el.products}</li>
+                    <li>{el.name}</li>
                     <li>
                       {el.price
                         .toString()
