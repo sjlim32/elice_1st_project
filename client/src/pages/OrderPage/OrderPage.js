@@ -118,7 +118,7 @@ function OrderPage() {
           </OrderCard>
         </CardWrap>
         <CardWrap width="100%">
-          <OrderCard height="90vh">
+          <OrderCard height="100vh">
             <OrderCardColor>
               <OrderboxText>주문상품/금액</OrderboxText>
             </OrderCardColor>
@@ -132,10 +132,10 @@ function OrderPage() {
             <Line widthLength="120vh" />
 
             <TextWrap>
-              <PersonalOrderInnerText>총{item.length}개</PersonalOrderInnerText>
+              <TotalPriceText>총{item.length}개</TotalPriceText>
             </TextWrap>
             <TextWrap>
-              <PersonalOrderInnerText>{totalprice}KRW</PersonalOrderInnerText>
+              <TotalPriceText>{totalprice}KRW</TotalPriceText>
             </TextWrap>
             <div>
               <PayButton onClick={handleSubmit} padding="10vh">
@@ -224,10 +224,17 @@ const TextMargin = styled.div`
 
 const PicWrap = styled.div`
   padding: 10vh 0 0 13vh;
+  display: block;
 `;
 
 const PayButton = styled(StyledButton)`
-  margin: 13vh 0 0 50vh;
+  margin: 3vh 0 0 50vh;
+`;
+
+const TotalPriceText = styled.p`
+  margin: 2vh 0 0 35vh;
+  font-weight: 600;
+  font-size: 1.2em;
 `;
 
 export default OrderPage;

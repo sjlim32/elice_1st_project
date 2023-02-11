@@ -47,7 +47,7 @@ const OrderedItemPrice = styled.div`
 `;
 
 const ItemWrap = styled.div`
-  margin: 0vh 0vh 0vh 0vh;
+  margin: 0vh 0vh 0vh 20vh;
   float: left;
 `;
 
