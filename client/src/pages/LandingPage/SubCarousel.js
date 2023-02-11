@@ -60,10 +60,6 @@ const ItemImg = styled.img`
 function SubCarousel() {
     const navigate = useNavigate();
 
-  const moveHandler = () =>{
-    navigate('/product/63e4879faf48818c1d5cc9e3');
-  }
-
   const settings = {
     dots: true,
     fade: false,
@@ -91,7 +87,7 @@ function SubCarousel() {
         </div>
         <div>
         <SubCardBox>
-          <ItemImg alt="SliderItem" src="/image/4.png" onClick={moveHandler} />
+          <ItemImg alt="SliderItem" src="/image/4.png" />
           <p>모 헤어 울 팬츠&nbsp;&nbsp;&nbsp;&nbsp;765,000 KRW</p>
         </SubCardBox>
           <SubCardBox>
