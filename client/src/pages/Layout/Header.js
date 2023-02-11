@@ -75,10 +75,11 @@ function Icon() {
 
   function moveHandler() {
     if (localStorage.getItem('userToken')) {
-      navigate('/user/:userid');
-    }
+    navigate(`/user/${JSON.parse(localStorage.getItem('userData'))._id}`);
+    } else {
     navigate('/user/signup');
-  }
+    }
+    }
 
   return (
     <div>
