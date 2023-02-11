@@ -11,7 +11,7 @@ export const createOrder = async (req, res) => {
     total_price,
     order_request,
   };
-
+  console.log(newOrder);
   try {
     const order = await Order.create(newOrder);
     const user = await User.findOne({ _id: user_id });
@@ -26,11 +26,9 @@ export const createOrder = async (req, res) => {
 // * 주문 정보 조회
 export const getOrderDetails = async (req, res) => {
   const userId = req.params.user_id;
-
+  console.log(userId);
   try {
-    const user = await User.find({ _id: userId })
-      .populate({ path: 'order', select: ['products', 'total_price', 'status'] })
-      .populate({ path: 'product', select: ['name', 'price'] });
+    const user = await User.find({ _id: userId }).populate({ path: 'order', populate: { path: 'products', select: ['name', 'price'] } });
     res.status(200).json(user);
   } catch (error) {
     console.log(error);
