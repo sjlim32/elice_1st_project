@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useNavigate } from 'react-router-dom';
 
 const StyledSlider = styled(Slider)`
   .slick-prev {
@@ -58,21 +58,11 @@ const ItemImg = styled.img`
 `;
 
 function SubCarousel() {
-  //상품정보 받아오기
-  //   const [item, setItem] = useState([]);
-  //   const [price, setPrice] = useState([]);
+    const navigate = useNavigate();
 
-  //   useEffect(() => {
-  //     try {
-  //       const res = axios.get('');
-  //       const getItem = res.data.name;
-  //       const getPrice = res.data.price;
-  //       setItem(getItem);
-  //       setPrice(getPrice);
-  //     } catch (error) {
-  //       console.log('상품정보를 가져오지 못했습니다.');
-  //     }
-  //   }, []);
+  const moveHandler = () =>{
+    navigate('/product/63e4879faf48818c1d5cc9e3');
+  }
 
   const settings = {
     dots: true,
@@ -86,28 +76,31 @@ function SubCarousel() {
     <div>
       <StyledSlider {...settings}>
         <div>
-          <SubCardBox>
-            <ItemImg alt="SliderItem1" src="/image/bottega1.jpg" />
-            <p>상품1 1,000,000KRW</p>
+        <SubCardBox>
+            <ItemImg alt="SliderItem1" src="/image/1.png" />
+            <p>그레이니 레더 미니 TB 파우치&nbsp;&nbsp;&nbsp;&nbsp;1,500,000 KRW</p>
           </SubCardBox>
           <SubCardBox>
-            <ItemImg alt="SliderItem1" src="/image/bottega1.jpg" />
-            <p>상품2 1,000,000KRW</p>
+            <ItemImg alt="SliderItem1" src="/image/2.png" />
+            <p>스말토 보석 목걸이&nbsp;&nbsp;&nbsp;&nbsp;1,110,000 KRW</p>
           </SubCardBox>
           <SubCardBox>
-            <ItemImg alt="SliderItem1" src="/image/bottega1.jpg" />
-            <p>상품3 1,000,000KRW</p>
+            <ItemImg alt="SliderItem1" src="/image/3.png" />
+            <p>모노그램 모티브 레더 미디엄 토트&nbsp;&nbsp;&nbsp;&nbsp;410,000 KRW</p>
           </SubCardBox>
         </div>
         <div>
+        <SubCardBox>
+          <ItemImg alt="SliderItem" src="/image/4.png" onClick={moveHandler} />
+          <p>모 헤어 울 팬츠&nbsp;&nbsp;&nbsp;&nbsp;765,000 KRW</p>
+        </SubCardBox>
           <SubCardBox>
-            <ItemImg alt="SliderItem2" src="/image/bottega2.jpg" />
+            <ItemImg alt="SliderItem2" src="/image/5.png" />
+            <p>숄더 스트랩 토트 백&nbsp;&nbsp;&nbsp;&nbsp;4,300,000 KRW</p>
           </SubCardBox>
           <SubCardBox>
-            <ItemImg alt="SliderItem2" src="/image/bottega2.jpg" />
-          </SubCardBox>
-          <SubCardBox>
-            <ItemImg alt="SliderItem2" src="/image/bottega2.jpg" />
+            <ItemImg alt="SliderItem2" src="/image/6.png" />
+            <p>로고 프린트 코튼 티셔츠&nbsp;&nbsp;&nbsp;&nbsp;130,000 KRW</p>
           </SubCardBox>
         </div>
       </StyledSlider>

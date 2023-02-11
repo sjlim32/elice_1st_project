@@ -59,8 +59,8 @@ function MainCarousel() {
   return (
     <div>
       <StyledSlider {...settings}>
-        <MainCardBox alt="SliderItem1" src="/image/bottega1.jpg" />
-        <MainCardBox alt="SliderItem1" src="/image/bottega2.jpg" />
+        <MainCardBox alt="SliderItem1" src="/image/celine.jpg" />
+        <MainCardBox alt="SliderItem1" src="/image/prada.jpg" />
       </StyledSlider>
     </div>
   );
