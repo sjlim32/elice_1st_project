@@ -49,7 +49,7 @@ export default function OrderList({ data }) {
             </TitleTab>
             <Infos>
               <ul className="item-tabs">
-                {el.products.map(el => (
+                {el.order.map(el => (
                   <div className="show-items" key={el.product}>
                     <li className="image-info">
                       <img
