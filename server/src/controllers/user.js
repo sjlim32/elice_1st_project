@@ -49,13 +49,10 @@ export const logIn = async (req, res) => {
     if (!isPasswordCorrect) {
       return res.status(404).json({ message: '잘못된 비밀번호입니다.' });
     }
-    const secret = process.env.JWT || 'eligance';
+    const secret = process.env.JWT || 'elice';
     const token = jwt.sign(
       { email: existingUser.email, _id: existingUser._id, name: existingUser.name, admin: existingUser.admin },
       secret
-      /*  {
-                 expiresIn: '6h',
-             } */
     );
     res.status(200).json({ token });
   } catch (error) {

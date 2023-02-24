@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import API from '../../API';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -13,8 +13,8 @@ export default function ProductDetail() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:5001/product/${productId}`).then(res => {
-      setInfo(res.data);
+    API.get(`/api/product/${productId}`).then(res => {
+      setInfo({ ...res.data, count: 1 });
     });
   }, []);
 
@@ -25,7 +25,8 @@ export default function ProductDetail() {
   // }, []);
 
   const addItemToCart = () => {
-    localStorage.setItem('cart', JSON.stringify([info]));
+    let cartItems = JSON.parse(localStorage.getItem('cart'));
+    localStorage.setItem('cart', JSON.stringify([...cartItems, info]));
     let result = window.confirm('장바구니로 이동하시겠습니까?');
     if (result) {
       navigate('/cart');
@@ -39,7 +40,10 @@ export default function ProductDetail() {
       <ProductSummary>
         <div className="product-img">
           <img
-            src={info && `http://localhost:5001/uploads/${info._id}.png`}
+            src={
+              info &&
+              `http://kdt-ai6-team01.elicecoding.com/api/uploads/${info._id}.png`
+            }
             alt="product-Img"
           />
         </div>

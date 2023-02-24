@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import axios from 'axios';
+import API from '../../API';
 import StyledButton from '../../components/StyledButton';
 import jwt_decode from 'jwt-decode';
 
@@ -68,14 +68,18 @@ function LoginPage() {
     e.preventDefault();
 
     try {
-      const res = await axios.post('http://localhost:5001/user/login', {
+      const res = await API.post('/api/user/login', {
         email,
         password,
       });
       const user = res.data;
       const jwtToken = user.token;
+      localStorage.setItem('userToken', jwtToken);
       const decodedJwt = jwt_decode(jwtToken);
-      localStorage.setItem('userToken', JSON.stringify(decodedJwt));
+      localStorage.setItem('userData', JSON.stringify(decodedJwt));
+      if (!localStorage.getItem('userData')){
+        navigate('/signup')
+      }
       navigate('/');
     } catch (err) {
       alert(err.response.data.message);

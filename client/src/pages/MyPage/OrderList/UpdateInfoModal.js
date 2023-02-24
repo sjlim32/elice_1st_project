@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import API from '../../../API';
 import styled from 'styled-components';
 
 export default function UpdateInfoModal({ setIsToUpdate, orderId }) {
@@ -20,7 +20,7 @@ export default function UpdateInfoModal({ setIsToUpdate, orderId }) {
 
   const submitHandler = () => {
     alert('수정이 완료되었습니다');
-    axios.patch(`http://localhost:5001/order/${orderId}`, inputValue);
+    API.patch(`/api/order/${orderId}`, inputValue);
     setIsToUpdate(false);
   };
   return (

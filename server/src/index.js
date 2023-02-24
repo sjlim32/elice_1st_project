@@ -1,7 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import multer from 'multer';
-import fs from 'fs';
 
 import connect from './schemas/index.js';
 import userRouter from './routes/user.js';
@@ -10,11 +8,10 @@ import productRouter from './routes/product.js';
 import categoryRouter from './routes/category.js';
 import orderRouter from './routes/order.js';
 import admin from './middlewares/admin.js';
-//import passportConfig from './passport/index.js';
-//import passport from 'passport';
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // cross-origin
 const corsConfig = {
@@ -38,5 +35,5 @@ app.use('/api/order', orderRouter);
 const PORT = process.env.PORT || 5001;
 
 app.listen(PORT, () => {
-  console.log('server is running');
+  console.log(`server is running at port ${PORT}`);
 });

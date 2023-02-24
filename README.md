@@ -27,13 +27,21 @@
 ## 프로젝트 상세
 > ### 테스트 계정
 > - 관리자
->    - ID: [ 입력필요 ]
->    - PW: [ 입력필요 ] 
+>    - ID: [ admin@test.com ]
+>    - PW: [ 12341234 ] 
 >- 일반
->    - ID: [ 입력필요 ]
->    - PW: [ 입력 필요 ]
-## 구현 화면
-
-
+>    - ID: [ user@test.com ]
+>    - PW: [ 12341234 ]
 
 ## 실행 방법
+
+### 1. git clone 을 통해 repository를 local directory 로 복사
+
+### 2. client 폴더와 server 폴더에서 각각 npm install 을 통해 module 설치
+
+### 3. Backend의 DB 연동을 위한 `.env` 파일 설정 추가
+```
+MONGO_URI=< 몽고DB URI >
+PORT=5001
+```
+### 4. client 와 server 폴더를 각각 npm run start 로 실행

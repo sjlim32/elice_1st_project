@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../API';
 import styled from 'styled-components';
 import Line from '../../components/line';
 import OrderList from './OrderList/OrderList';
@@ -8,9 +8,9 @@ import MyInfoList from './MyInfoList/MyInfoList';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function MyPage() {
-  const [customerInfo, setCustomerInfo] = useState('');
+  const [customerInfo, setCustomerInfo] = useState([]);
   const [currentTab, setCurrentTab] = useState('');
-  const [orderList, setOrderList] = useState('');
+  const [orderList, setOrderList] = useState([]);
   const { userid } = useParams();
   const navigate = useNavigate();
 
@@ -23,13 +23,9 @@ export default function MyPage() {
   // }, []);
 
   useEffect(() => {
-    const userId = JSON.parse(localStorage.getItem('userToken'))._id;
-    axios
-      .get(`http://localhost:5001/user/${userId}`)
-      .then(res => setCustomerInfo(res.data));
-    axios
-      .get(`http://localhost:5001/order/${userId}`)
-      .then(res => setOrderList(res.data));
+    const userId = JSON.parse(localStorage.getItem('userData'))._id;
+    API.get(`/api/user/${userId}`).then(res => setCustomerInfo(res.data));
+    API.get(`/api/order/${userId}`).then(res => setOrderList(res.data));
   }, []);
 
   return (

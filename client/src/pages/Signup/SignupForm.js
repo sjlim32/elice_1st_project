@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import API from '../../API';
 import { useNavigate } from 'react-router-dom';
 
 export default function SignupForm() {
@@ -25,7 +25,7 @@ export default function SignupForm() {
   // 유효성확인_버튼활성화
   const activateButton =
     name.length >= 2 &&
-    password.length >= 6 &&
+    password.length > 6 &&
     confirmPassword === password &&
     email.includes('@' && '.com') &&
     name.length >= 1 &&
@@ -44,7 +44,7 @@ export default function SignupForm() {
   const pwValidation = e => {
     let pw = e.target.value;
     setInputValue({ ...inputValue, password: pw });
-    pw.length > 5 ? setPwMsg('') : setPwMsg('비밀번호를 6자이상 입력해주세요.');
+    pw.length > 5 ? setPwMsg('') : setPwMsg('비밀번호를 7자이상 입력해주세요.');
   };
 
   const confirmPwValidation = e => {
@@ -65,21 +65,19 @@ export default function SignupForm() {
 
   const handleSignup = e => {
     e.preventDefault();
-    axios
-      .post('http://localhost:5001/user/signup', {
-        email: email,
-        name: name,
-        password: password,
-        address: address,
-        contact: contact,
-      })
+    API.post('/api/user/signup', {
+      email: email,
+      name: name,
+      password: password,
+      address: address,
+      contact: contact,
+    })
       .then(res => {
         alert(res.data.message);
-        console.log(res);
         navigate('/user/login');
       })
       .catch(error => {
-        console(error.response.data.message);
+        console.log(error.response.data.message);
       });
   };
 

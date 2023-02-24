@@ -1,19 +1,19 @@
 import { useState } from 'react';
-import axios from 'axios';
+import API from '../../../API';
 import styled from 'styled-components';
 import UpdateInfoModal from './UpdateInfoModal';
+import moment from 'moment';
 
 export default function OrderList({ data }) {
-  const [orderData, setOrderData] = useState();
   const [isToUpdate, setIsToUpdate] = useState(false);
+  console.log(data);
 
   const updateOrderHandler = () => {
     setIsToUpdate(true);
   };
 
   const cancelOrderHandler = () => {
-    axios
-      .delete(`http://localhost:5001/order/${data.order_id}`) // path에 orderid추가하기
+    API.delete(`/api/order/${data.order_id}`) // path에 orderid추가하기
       .then(() => alert('주문이 취소되었습니다.'));
   };
 
@@ -27,7 +27,7 @@ export default function OrderList({ data }) {
               <ul className="total-ul-tab">
                 <li>
                   <span className="bold">주문일자</span> <span>|</span>
-                  <span>{el.date}</span>
+                  <span>{moment(el.createdAt).format('YYYY-MM-DD')}</span>
                 </li>
                 <li>
                   <span className="bold">배송상태</span> <span>|</span>
@@ -49,13 +49,16 @@ export default function OrderList({ data }) {
             </TitleTab>
             <Infos>
               <ul className="item-tabs">
-                {el.items.map(el => (
+                {el.order.map(el => (
                   <div className="show-items" key={el.product}>
                     <li className="image-info">
-                      <img src={el.image} alt={el.products} />
+                      <img
+                        src={`http://kdt-ai6-team01.elicecoding.com/api/uploads/${el._id}.png`}
+                        alt={el.products}
+                      />
                     </li>
                     <li>{el.count}</li>
-                    <li>{el.products}</li>
+                    <li>{el.name}</li>
                     <li>
                       {el.price
                         .toString()

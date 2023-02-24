@@ -4,7 +4,6 @@ import Line from '../../components/line';
 import StyledButton from '../../components/StyledButton';
 import OrderList from './OrderList';
 import API from '../../API';
-import axios from 'axios';
 
 function OrderPage() {
   const [item, setItem] = useState([]);
@@ -17,20 +16,19 @@ function OrderPage() {
   });
 
   let totalprice = 0;
-  item.forEach((i)=>{
+  item.forEach(i => {
     totalprice += i.price * i.count;
-  })
+  });
 
   useEffect(() => {
     const dataFromLocalStorage = localStorage.getItem('purchase');
     const parsedData = JSON.parse(dataFromLocalStorage);
     setItem(parsedData);
     console.log(item);
-    if (localStorage.getItem('userToken')) {
-      const decoded = JSON.parse(localStorage.getItem('userToken'));
+    if (localStorage.getItem('userData')) {
+      const decoded = JSON.parse(localStorage.getItem('userData'));
       console.log('decoded', decoded._id);
-      axios
-        .get(`http://localhost:5001/user/${decoded._id}`)
+      API.get(`/api/user/${decoded._id}`)
         .then(res => {
           console.log(res);
           setUser(prev => {
@@ -55,8 +53,9 @@ function OrderPage() {
     const cartData = localStorage.getItem('cart');
     const parsedCartData = JSON.parse(cartData);
 
+    if (localStorage.getItem('userData')) {
     try {
-      await axios.post(`http://localhost:5001/order`, {
+      await API.post(`/api/order`, {
         user_id: user.id,
         products: parsedCartData.map(i => i._id),
         address: user.address,
@@ -67,17 +66,15 @@ function OrderPage() {
       console.log(`${err.response.data.message}`);
       alert('상품 주문에 실패하였습니다. 다시 시도해 주세요.');
     }
+    }
   };
 
   const pay = ['가상계좌', '신용/체크카드', '토스페이', '네이버페이'];
   const userOrderInfo = ['이름', '연락처', '주소', '이메일'];
 
-
   return (
     <Wrap>
-      <OrderHeading>
-        주문/결제
-      </OrderHeading>
+      <OrderHeading>주문/결제</OrderHeading>
       <InlineWrap>
         <CardWrap width="50%">
           <OrderCard height="40vh">
@@ -121,7 +118,7 @@ function OrderPage() {
           </OrderCard>
         </CardWrap>
         <CardWrap width="100%">
-          <OrderCard height="90vh">
+          <OrderCard height="100vh">
             <OrderCardColor>
               <OrderboxText>주문상품/금액</OrderboxText>
             </OrderCardColor>
@@ -135,10 +132,10 @@ function OrderPage() {
             <Line widthLength="120vh" />
 
             <TextWrap>
-              <PersonalOrderInnerText>총{item.length}개</PersonalOrderInnerText>
+              <TotalPriceText>총{item.length}개</TotalPriceText>
             </TextWrap>
             <TextWrap>
-              <PersonalOrderInnerText>{totalprice}KRW</PersonalOrderInnerText>
+              <TotalPriceText>{totalprice}KRW</TotalPriceText>
             </TextWrap>
             <div>
               <PayButton onClick={handleSubmit} padding="10vh">
@@ -227,11 +224,17 @@ const TextMargin = styled.div`
 
 const PicWrap = styled.div`
   padding: 10vh 0 0 13vh;
+  display: block;
 `;
 
 const PayButton = styled(StyledButton)`
-  margin: 13vh 0 0 50vh;
+  margin: 3vh 0 0 50vh;
 `;
 
+const TotalPriceText = styled.p`
+  margin: 2vh 0 0 35vh;
+  font-weight: 600;
+  font-size: 1.2em;
+`;
 
 export default OrderPage;

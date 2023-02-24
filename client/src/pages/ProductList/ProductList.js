@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import API from '../../API';
 import styled from 'styled-components';
 import ShowProduct from './ShowProduct';
 
@@ -33,13 +33,11 @@ export default function ProductList() {
   };
 
   useEffect(() => {
-    axios
-      .get(
-        `http://localhost:5001/product?gender=${reqData.gender}&major_classification=${reqData.major_classification}&minor_classification=${reqData.minor_classification}`
-      )
-      .then(res => {
-        setCategory(res.data.products);
-      });
+    API.get(
+      `/api/product?gender=${reqData.gender}&major_classification=${reqData.major_classification}&minor_classification=${reqData.minor_classification}`
+    ).then(res => {
+      setCategory(res.data.products);
+    });
   }, [reqData]);
 
   // 맨 위로가기 기능
