@@ -1,20 +1,17 @@
-//회원정보 조회 & 수정 & 탈퇴
+//회원정보 조회 & 수정 & 탈퇴 & 로그아웃
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 
 export default function MyInfoList({ datas }) {
+  const navigate = useNavigate();
+
   const [btnState, setBtnState] = useState('정보수정하기');
   const [emailMsg, setEmailMsg] = useState('');
   const [pwMsg, setPwMsg] = useState('');
-  const [inputValue, setInputValue] = useState({
-    email: '',
-    password: '',
-    name: '',
-    contact: '',
-    address: '',
-  });
+  const [inputValue, setInputValue] = useState(datas);
 
   const pwValidation = e => {
     setBtnState('변경사항 저장하기');
@@ -47,7 +44,7 @@ export default function MyInfoList({ datas }) {
     btnState === '변경사항 저장하기' && alert('회원정보가 변경되었습니다.');
     axios
       .patch(`http://localhost:5001/user/${datas.id}`, inputValue)
-      .then(res => alert(res.data.message));
+      .then(res => alert(res.response.data.message));
   };
 
   // 회원정보 삭제
@@ -55,6 +52,12 @@ export default function MyInfoList({ datas }) {
     axios
       .delete(`http://localhost:5001/user/${datas.id}`)
       .then(res => alert(res.data.message));
+  };
+
+  // 로그아웃
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/');
   };
 
   return (
@@ -69,7 +72,7 @@ export default function MyInfoList({ datas }) {
                 id="email"
                 type="email"
                 name="email"
-                placeholder={datas.email}
+                value={inputValue.email}
                 onChange={emailValidation}
                 onBlur={() => {
                   setEmailMsg('');
@@ -86,7 +89,7 @@ export default function MyInfoList({ datas }) {
                 id="password"
                 type="password"
                 name="password"
-                placeholder="******"
+                value={inputValue.password}
                 onChange={pwValidation}
                 onBlur={() => {
                   setPwMsg('');
@@ -104,8 +107,8 @@ export default function MyInfoList({ datas }) {
                 id="name"
                 type="text"
                 name="name"
+                value={inputValue.name}
                 onChange={inputhandler}
-                placeholder={datas.name}
               />
             </div>
           </div>
@@ -117,8 +120,8 @@ export default function MyInfoList({ datas }) {
                 id="contact"
                 type="text"
                 name="contact"
+                value={inputValue.contact}
                 onChange={inputhandler}
-                placeholder={datas.phone}
               />
             </div>
           </div>
@@ -130,13 +133,16 @@ export default function MyInfoList({ datas }) {
                 id="address"
                 type="text"
                 name="address"
+                value={inputValue.address}
                 onChange={inputhandler}
-                placeholder={datas.address}
               />
             </div>
           </div>
           <StyledButton>{btnState}</StyledButton>
         </form>
+        <button className="logout-btn" onClick={handleLogout}>
+          로그아웃
+        </button>
         <button className="delete-info-btn" onClick={handleDeleteInfo}>
           회원 탈퇴
         </button>
@@ -186,6 +192,24 @@ const MyInfos = styled.div`
     color: red;
     font-size: 10.5px;
     padding-top: 5px;
+  }
+
+  > .logout-btn {
+    background-color: rgba(153, 164, 151, 1);
+    color: white;
+    font-size: 13px;
+    font-weight: 400;
+    width: 10%;
+    border: none;
+    border-radius: 15px;
+    padding-block: 10px;
+    text-align: center;
+    transition: 0.25s;
+    &:hover {
+      cursor: pointer;
+      background-color: gray;
+      color: white;
+    }
   }
 
   > form {

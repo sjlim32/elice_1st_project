@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ShowProduct from './ShowProduct';
 
 export default function ProductList() {
-  const [category, setCategory] = useState();
+  const [category, setCategory] = useState([]);
   const [ScrollY, setScrollY] = useState(0); // 스크롤값 저장
   const [BtnToTop, setBtnToTop] = useState(false);
   const [currentTab, setCurrentTab] = useState('의류');
@@ -18,13 +18,24 @@ export default function ProductList() {
 
   // reqDataHandlers
   const reqDataHandlers = e => {
-    setReqData({ ...reqData, [e.target.title]: e.target.id });
+    if (e.target.title === 'major_classification') {
+      setReqData({
+        ...reqData,
+        minor_classification: '',
+        [e.target.title]: e.target.id,
+      });
+    } else {
+      setReqData({
+        ...reqData,
+        [e.target.title]: e.target.id,
+      });
+    }
   };
 
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5001/product/${reqData.gender}/${reqData.major_classification}/${reqData.minor_classification}`
+        `http://localhost:5001/product?gender=${reqData.gender}&major_classification=${reqData.major_classification}&minor_classification=${reqData.minor_classification}`
       )
       .then(res => {
         setCategory(res.data.products);
@@ -60,11 +71,21 @@ export default function ProductList() {
   return (
     <Container>
       <MainNav>
-        <span id="female" title="gender" onClick={reqDataHandlers}>
+        <span
+          className="gender"
+          id="여성"
+          title="gender"
+          onClick={reqDataHandlers}
+        >
           여성
         </span>
         <span>|</span>
-        <span id="male" title="gender" onClick={reqDataHandlers}>
+        <span
+          className="gender"
+          id="남성"
+          title="gender"
+          onClick={reqDataHandlers}
+        >
           남성
         </span>
       </MainNav>
@@ -114,13 +135,15 @@ export default function ProductList() {
         </ul>
       </SubMenuTab>
 
-      <div className="contents">{/* <ShowProduct datas={category} /> */}</div>
+      <div className="contents">
+        <ShowProduct datas={category} />
+      </div>
     </Container>
   );
 }
 
 const Container = styled.div`
-  margin-top: 90px;
+  margin-top: 20px;
   width: 100%;
   padding: 40px;
   > .topBtn {
@@ -214,13 +237,19 @@ const SubMenuTab = styled.div`
 `;
 
 const MainNav = styled.div`
-  width: 100%;
-  border-bottom: 10px solid rgba(153, 164, 151, 1);
+  width: 13%;
+  color: black;
+  margin: 10px auto;
   padding-bottom: 20px;
-  font-weight: 600;
-  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 23px;
   > span {
     padding: 5px;
+  }
+  > .gender {
+    cursor: pointer;
   }
 `;
 

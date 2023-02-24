@@ -81,28 +81,25 @@ function Nav() {
 }
 
 function Icon() {
-  // const [isLogin, setisLogin] = useState(false);
-  // const navigate = useNavigate();
-  // //로그인 여부에 따른 라우팅
-  // useEffect(() => {
-  //   try {
-  //     localStorage.getItem('userToken');
-  //     setisLogin(true);
-  //     navigate('/user/mypage');
-  //   } catch (err) {
-  //     navigate('/user/signup');
-  //   }
-  // }, []);
+  const navigate = useNavigate();
 
   function moveHandler() {
-    window.location.href = '/user/signup';
+    if (localStorage.getItem('userToken')) {
+      navigate('/user/:userid');
+    }
+    navigate('/user/signup');
   }
 
   return (
     <div>
       <ul>
         <li>
-          <ShoppingIconStyle fontSize="large">
+          <ShoppingIconStyle
+            fontSize="large"
+            onClick={() => {
+              navigate(`/cart`);
+            }}
+          >
             <AddShoppingCartIcon />
           </ShoppingIconStyle>
         </li>

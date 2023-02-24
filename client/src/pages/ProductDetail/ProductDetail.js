@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import banner from '../../images/banner.png';
@@ -10,28 +10,38 @@ export default function ProductDetail() {
   const { productId } = useParams();
   const [info, setInfo] = useState();
 
-  // useEffect(() => {
-  //   axios.get(`http://localhost:5001/product/${productId}`).then(res => {
-  //     setInfo(res.data);
-  //   });
-  // }, []);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('/data/ProductDetail.json').then(res => {
+    axios.get(`http://localhost:5001/product/${productId}`).then(res => {
       setInfo(res.data);
     });
   }, []);
 
+  // useEffect(() => {
+  //   axios.get('/data/ProductDetail.json').then(res => {
+  //     setInfo(res.data);
+  //   });
+  // }, []);
+
   const addItemToCart = () => {
-    localStorage.setItem('cart', JSON.stringify(info));
-    alert('장바구니에 추가되었습니다.');
+    localStorage.setItem('cart', JSON.stringify([info]));
+    let result = window.confirm('장바구니로 이동하시겠습니까?');
+    if (result) {
+      navigate('/cart');
+    } else {
+      console.log('취소 되었습니다.');
+    }
   };
 
   return (
     <Container>
       <ProductSummary>
         <div className="product-img">
-          <img src={info && info.image} alt="product-Img" />
+          <img
+            src={info && `http://localhost:5001/uploads/${info._id}.png`}
+            alt="product-Img"
+          />
         </div>
         <div className="product-detail-all">
           <div className="product-detail-basic">
@@ -118,10 +128,10 @@ const ProductSummary = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 90px; 
+  margin-bottom: 90px;
   height: 500px;
   width: 100%;
- 
+
   > .product-img {
     height: 100%;
     width: 30%;
@@ -178,18 +188,18 @@ const ProductSummary = styled.div`
       justify-content: space-around;
       align-items: center;
 
-
       > button {
         height: 50%;
         width: 40%;
         font-size: 18px;
         border-radius: 20px;
-        font-weight:600;
+        font-weight: 600;
         border: none;
         background-color: #cad0c8;
       }
-      >.btn-admin-only{
-        background-color:rgba(153, 164, 151, 1);
+      > .btn-admin-only {
+        background-color: rgba(153, 164, 151, 1);
+      }
     }
   }
 `;

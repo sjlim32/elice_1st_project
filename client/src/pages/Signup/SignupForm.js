@@ -71,14 +71,15 @@ export default function SignupForm() {
         name: name,
         password: password,
         address: address,
-        phone: contact,
+        contact: contact,
       })
       .then(res => {
         alert(res.data.message);
+        console.log(res);
         navigate('/user/login');
       })
       .catch(error => {
-        alert(error.response.data.message);
+        console(error.response.data.message);
       });
   };
 
@@ -157,10 +158,10 @@ export default function SignupForm() {
           <input
             required
             id="contact"
-            type="number"
+            type="text"
             name="contact"
             onChange={inputhandler}
-            placeholder="000-0000-0000"
+            placeholder="휴대폰번호를 입력해주세요"
           />
         </div>
       </div>

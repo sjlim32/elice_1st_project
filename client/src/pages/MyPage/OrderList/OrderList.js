@@ -51,27 +51,24 @@ export default function OrderList({ data }) {
               <ul className="item-tabs">
                 {el.items.map(el => (
                   <div className="show-items" key={el.product}>
-                    <li classname="p-image">
+                    <li className="image-info">
                       <img src={el.image} alt={el.products} />
                     </li>
-                    <li classname="p-count">{el.count}</li>
-                    <li className="p-name">{el.products}</li>
-                    <li className="p-price">
+                    <li>{el.count}</li>
+                    <li>{el.products}</li>
+                    <li>
                       {el.price
                         .toString()
                         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                       KRW
                     </li>
-                    <li className="each-item">{el.date}</li>
-                    <li className="each-item">{el.status}</li>
                   </div>
                 ))}
               </ul>
-              <li>
-                <StyledButton width="70px" onClick={cancelOrderHandler}>
-                  주문 취소
-                </StyledButton>
-              </li>
+
+              <StyledButton width="70px" onClick={cancelOrderHandler}>
+                주문 취소
+              </StyledButton>
             </Infos>
           </div>
         ))}
@@ -141,8 +138,8 @@ const OrderInfos = styled.div`
 
 const TitleTab = styled.div`
   width: 100%;
-  margin: 10px auto;
-  font-size: 16px;
+  margin: 30px 0px;
+  font-size: 18px;
   text-align: center;
   font-weight: 600;
   > .tabs {
@@ -164,56 +161,32 @@ const TitleTab = styled.div`
 
 const Infos = styled.div`
   width: 100%;
-  margin: 10px auto;
-  font-size: 16px;
-  text-align: center;
-  font-weight: 600;
-  > .item-tabs {
+
+  .item-tabs {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-    > .show-items {
+    .show-items {
       display: flex;
       justify-content: space-around;
       align-items: center;
       width: 100%;
       > li {
+        font-size: 18px;
         height: 100px;
         margin: 10px;
         width: 100%;
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         img {
-          height: 80px;
+          height: 90px;
+          width: 90px;
         }
       }
     }
-  }
-
-  > li {
-    width: 100%;
-    text-align: center;
-    border-right: 2px solid #373837;
-    color: #373837;
-    &:last-child {
-      border-right: none;
-    }
-  }
-  > .each-item {
-    border: none;
-    font-weight: 600;
-    > img {
-      height: 50px;
-      width: 50px;
-    }
-  }
-
-  > .contents {
-    text-align: center;
-    font-size: 70px;
-    border-top: none;
-    color: black;
   }
 `;
 
@@ -224,11 +197,12 @@ const StyledButton = styled.button`
   font-weight: 500;
   border: none;
   border-radius: 10px;
-  height: 30px;
+  height: 40px;
   padding: 5px;
-  width: ${props => props.width};
+  width: 100px;
   text-align: center;
   transition: 0.25s;
+  margin-bottom: 40px;
   &:hover {
     cursor: pointer;
     background-color: gray;
